@@ -1,0 +1,18 @@
+---- rs485buf Matches (18 in 1 files) ----
+Main.c (user):static u8 rs485buf[LEN_control];
+Main.c (user):rs485buf[1]=1;
+Main.c (user):rs485buf[2]=1;
+Main.c (user):for(i=rs485buf[1];i<=32;i++)
+Main.c (user):		rs485buf[1]++;
+Main.c (user):if(rs485buf[1]==32)rs485buf[1]=1;
+Main.c (user):		rs485buf[2]++;
+Main.c (user):if(rs485buf[2]==32)rs485buf[2]=1;
+Main.c (user):for(i=rs485buf[2];i<=32;i++)
+Main.c (user):		rs485buf[2]++;
+Main.c (user):if(rs485buf[2]==32)rs485buf[2]=1;
+Main.c (user):for(i=rs485buf[2];i<=32;i++)
+Main.c (user):		rs485buf[2]++;
+Main.c (user):if(rs485buf[2]==32)rs485buf[2]=1;
+---- rs485buf Search Errors Encountered (1) ----
+The following 1 files could not be processed:
+C:\Users\Administrator\Documents\GitHub\fast_control\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkLog.txt : File could not be opened.

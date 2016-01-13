@@ -1,0 +1,738 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\Administrator\Documents\GitHub\fast_control_copy\uCOSII2.91+UCGUI3.90A\MDK_Project\Project.uvproj
+Project File Date:  01/20/2014
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling 24cxx.c...
+linking...
+Program Size: Code=44476 RO-data=27044 RW-data=308 ZI-data=53548  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 0 Warning(s).
+Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_copy\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_copy\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N : 20141007 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.300V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(624): warning:  #177-D: variable "err" was declared but never referenced
+..\User\main.c(915): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1159): warning:  #940-D: missing return statement at end of non-void function "rs485_trans_order"
+..\User\main.c(2099): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2119): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2335): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2347): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2482): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2493): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2639): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2652): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1919): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1941): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1942): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1956): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(2882): warning:  #177-D: variable "count" was declared but never referenced
+..\User\main.c(40): warning:  #177-D: variable "App_TaskMasterStk" was declared but never referenced
+..\User\main.c(426): warning:  #177-D: function "App_TaskMaster" was declared but never referenced
+..\User\main.c(725): warning:  #177-D: function "urgent_task" was declared but never referenced
+..\User\main.c(497): warning: C3017W: exist may be used before being set
+linking...
+Program Size: Code=46096 RO-data=27048 RW-data=308 ZI-data=53548  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 20 Warning(s).
+Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_copy\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_copy\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N : 20141007 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.300V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(624): warning:  #177-D: variable "err" was declared but never referenced
+..\User\main.c(935): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1179): warning:  #940-D: missing return statement at end of non-void function "rs485_trans_order"
+..\User\main.c(2119): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2139): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2355): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2367): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2502): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2513): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2659): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2672): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1939): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1961): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1962): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1976): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(2902): warning:  #177-D: variable "count" was declared but never referenced
+..\User\main.c(40): warning:  #177-D: variable "App_TaskMasterStk" was declared but never referenced
+..\User\main.c(426): warning:  #177-D: function "App_TaskMaster" was declared but never referenced
+..\User\main.c(745): warning:  #177-D: function "urgent_task" was declared but never referenced
+..\User\main.c(497): warning: C3017W: exist may be used before being set
+linking...
+Program Size: Code=46404 RO-data=27044 RW-data=308 ZI-data=53548  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 20 Warning(s).
+Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_copy\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_copy\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N : 20141007 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.300V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(624): warning:  #177-D: variable "err" was declared but never referenced
+..\User\main.c(935): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1179): warning:  #940-D: missing return statement at end of non-void function "rs485_trans_order"
+..\User\main.c(2119): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2139): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2355): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2367): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2502): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2513): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2659): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2672): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1939): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1961): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1962): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1976): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(2902): warning:  #177-D: variable "count" was declared but never referenced
+..\User\main.c(40): warning:  #177-D: variable "App_TaskMasterStk" was declared but never referenced
+..\User\main.c(426): warning:  #177-D: function "App_TaskMaster" was declared but never referenced
+..\User\main.c(745): warning:  #177-D: function "urgent_task" was declared but never referenced
+..\User\main.c(497): warning: C3017W: exist may be used before being set
+linking...
+Program Size: Code=46388 RO-data=27044 RW-data=308 ZI-data=53548  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 20 Warning(s).
+Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_copy\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_copy\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N : 20141007 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.300V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(451): warning:  #111-D: statement is unreachable
+..\User\main.c(428): warning:  #177-D: variable "i" was declared but never referenced
+..\User\main.c(459): error:  #169: expected a declaration
+..\User\main.c(506): warning:  #12-D: parsing restarts here after previous syntax error
+..\User\main.c(507): error:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(507): error:  #59: function call is not allowed in a constant expression
+..\User\main.c(507): error:  #28: expression must have a constant value
+..\User\main.c(507): error:  #28: expression must have a constant value
+..\User\main.c(508): warning:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(508): error:  #92: identifier-list parameters may only be used in a function definition
+..\User\main.c(508): error:  #147: declaration is incompatible with "void Light_pad_on(u8, u8, u8, u8, u8)" (declared at line 102 of "..\lcd\inc\ch452.h")
+..\User\main.c(509): error:  #169: expected a declaration
+..\User\main.c(514): error:  #169: expected a declaration
+..\User\main.c(516): error:  #169: expected a declaration
+..\User\main.c(517): error:  #169: expected a declaration
+..\User\main.c(518): error:  #169: expected a declaration
+..\User\main.c(590): warning:  #12-D: parsing restarts here after previous syntax error
+..\User\main.c(592): error:  #169: expected a declaration
+..\User\main.c(641): warning:  #12-D: parsing restarts here after previous syntax error
+..\User\main.c(642): error:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(642): error:  #147: declaration is incompatible with "u8 rs485buf[14]" (declared at line 158)
+..\User\main.c(642): warning:  #520-D: initialization with "{...}" expected for aggregate object
+..\User\main.c(643): error:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(643): error:  #147: declaration is incompatible with "u8 first_init" (declared at line 164)
+..\User\main.c(644): error:  #169: expected a declaration
+..\User\main.c(680): warning:  #12-D: parsing restarts here after previous syntax error
+..\User\main.c(683): error:  #169: expected a declaration
+..\User\main.c(807): warning:  #12-D: parsing restarts here after previous syntax error
+..\User\main.c(810): error:  #79: expected a type specifier
+..\User\main.c(810): error:  #757: constant "ENABLE" is not a type name
+..\User\main.c(810): warning:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(810): error:  #147: declaration is incompatible with "void RCC_AHB1PeriphClockCmd(uint32_t, FunctionalState)" (declared at line 471 of "..\Lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h")
+..\User\main.c(813): error:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(813): error:  #65: expected a ";"
+..\User\main.c(814): error:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(814): error:  #65: expected a ";"
+..\User\main.c(815): error:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(815): error:  #65: expected a ";"
+..\User\main.c(816): error:  #79: expected a type specifier
+..\User\main.c(816): error:  #79: expected a type specifier
+Target not created
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(428): warning:  #177-D: variable "i" was declared but never referenced
+..\User\main.c(615): warning:  #177-D: variable "err" was declared but never referenced
+..\User\main.c(926): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1170): warning:  #940-D: missing return statement at end of non-void function "rs485_trans_order"
+..\User\main.c(2110): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2130): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2346): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2358): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2493): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2504): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2650): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2663): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1930): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1952): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1953): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1967): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(2893): warning:  #177-D: variable "count" was declared but never referenced
+..\User\main.c(40): warning:  #177-D: variable "App_TaskMasterStk" was declared but never referenced
+..\User\main.c(426): warning:  #177-D: function "App_TaskMaster" was declared but never referenced
+..\User\main.c(736): warning:  #177-D: function "urgent_task" was declared but never referenced
+..\User\main.c(488): warning: C3017W: exist may be used before being set
+linking...
+Program Size: Code=46404 RO-data=27044 RW-data=308 ZI-data=53548  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 21 Warning(s).
+Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_copy\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_copy\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N : 20141007 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.300V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(428): warning:  #177-D: variable "i" was declared but never referenced
+..\User\main.c(615): warning:  #177-D: variable "err" was declared but never referenced
+..\User\main.c(926): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1170): warning:  #940-D: missing return statement at end of non-void function "rs485_trans_order"
+..\User\main.c(2110): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2130): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2346): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2358): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2493): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2504): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2650): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2663): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1930): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1952): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1953): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1967): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(2893): warning:  #177-D: variable "count" was declared but never referenced
+..\User\main.c(40): warning:  #177-D: variable "App_TaskMasterStk" was declared but never referenced
+..\User\main.c(426): warning:  #177-D: function "App_TaskMaster" was declared but never referenced
+..\User\main.c(736): warning:  #177-D: function "urgent_task" was declared but never referenced
+..\User\main.c(488): warning: C3017W: exist may be used before being set
+linking...
+Program Size: Code=46356 RO-data=27044 RW-data=308 ZI-data=53548  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 21 Warning(s).
+Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_copy\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_copy\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N : 20141007 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.300V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(428): warning:  #177-D: variable "i" was declared but never referenced
+..\User\main.c(615): warning:  #177-D: variable "err" was declared but never referenced
+..\User\main.c(926): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1170): warning:  #940-D: missing return statement at end of non-void function "rs485_trans_order"
+..\User\main.c(2110): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2130): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2346): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2358): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2493): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2504): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2650): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2663): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1930): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1952): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1953): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1967): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(2893): warning:  #177-D: variable "count" was declared but never referenced
+..\User\main.c(40): warning:  #177-D: variable "App_TaskMasterStk" was declared but never referenced
+..\User\main.c(426): warning:  #177-D: function "App_TaskMaster" was declared but never referenced
+..\User\main.c(736): warning:  #177-D: function "urgent_task" was declared but never referenced
+..\User\main.c(488): warning: C3017W: exist may be used before being set
+linking...
+Program Size: Code=46396 RO-data=27044 RW-data=308 ZI-data=53548  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 21 Warning(s).
+Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_copy\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_copy\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N : 20141007 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.300V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(428): warning:  #177-D: variable "i" was declared but never referenced
+..\User\main.c(617): warning:  #177-D: variable "err" was declared but never referenced
+..\User\main.c(927): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1171): warning:  #940-D: missing return statement at end of non-void function "rs485_trans_order"
+..\User\main.c(2111): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2131): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2347): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2359): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2494): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2505): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2651): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2664): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1931): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1953): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1954): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1968): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(2894): warning:  #177-D: variable "count" was declared but never referenced
+..\User\main.c(40): warning:  #177-D: variable "App_TaskMasterStk" was declared but never referenced
+..\User\main.c(426): warning:  #177-D: function "App_TaskMaster" was declared but never referenced
+..\User\main.c(737): warning:  #177-D: function "urgent_task" was declared but never referenced
+..\User\main.c(488): warning: C3017W: exist may be used before being set
+linking...
+Program Size: Code=46388 RO-data=27044 RW-data=308 ZI-data=53548  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 21 Warning(s).
+Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_copy\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_copy\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N : 20141007 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.300V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(428): warning:  #177-D: variable "i" was declared but never referenced
+..\User\main.c(617): warning:  #177-D: variable "err" was declared but never referenced
+..\User\main.c(927): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1171): warning:  #940-D: missing return statement at end of non-void function "rs485_trans_order"
+..\User\main.c(2111): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2131): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2347): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2359): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2494): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2505): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2651): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2664): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1931): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1953): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1954): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1968): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(2894): warning:  #177-D: variable "count" was declared but never referenced
+..\User\main.c(40): warning:  #177-D: variable "App_TaskMasterStk" was declared but never referenced
+..\User\main.c(426): warning:  #177-D: function "App_TaskMaster" was declared but never referenced
+..\User\main.c(737): warning:  #177-D: function "urgent_task" was declared but never referenced
+..\User\main.c(488): warning: C3017W: exist may be used before being set
+linking...
+Program Size: Code=46388 RO-data=27044 RW-data=308 ZI-data=53284  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 21 Warning(s).
+Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_copy\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_copy\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N : 20141007 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.300V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(428): warning:  #177-D: variable "i" was declared but never referenced
+..\User\main.c(615): warning:  #177-D: variable "err" was declared but never referenced
+..\User\main.c(926): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1170): warning:  #940-D: missing return statement at end of non-void function "rs485_trans_order"
+..\User\main.c(2110): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2130): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2346): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2358): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2493): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2504): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2650): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(2663): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1930): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1952): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1953): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1967): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(2893): warning:  #177-D: variable "count" was declared but never referenced
+..\User\main.c(40): warning:  #177-D: variable "App_TaskMasterStk" was declared but never referenced
+..\User\main.c(426): warning:  #177-D: function "App_TaskMaster" was declared but never referenced
+..\User\main.c(736): warning:  #177-D: function "urgent_task" was declared but never referenced
+..\User\main.c(488): warning: C3017W: exist may be used before being set
+linking...
+Program Size: Code=46396 RO-data=27044 RW-data=308 ZI-data=53548  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 21 Warning(s).
+Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_copy\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_copy\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N : 20141007 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.300V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+Application running ...
