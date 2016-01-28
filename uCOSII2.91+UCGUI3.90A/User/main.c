@@ -22,30 +22,10 @@
 #define PI2  6.28318530717959
 #define cruccent_ratio  1.07//µçÁ÷Ð£ÕýÏµÊý
 #define zero_limit 1900         //1000ÎªµçÁ÷ÃÅÏÞ0.1           1500ÎªµçÁ÷ÃÅÏÞ0.15
-#define  APP_TASK_START_STK_SIZE                         64u
-static  OS_STK         App_TaskStartStk[APP_TASK_START_STK_SIZE];
-#define  APP_TASK_START_PRIO                               10
 
 
-#define  APP_TASK_LCD_STK_SIZE                          1024u
-static  OS_STK         App_TaskLCDStk[APP_TASK_LCD_STK_SIZE];
-#define  APP_TASK_LCD_PRIO                               3
 
 
-#define  APP_TASK_COMPUTER_STK_SIZE                       10240u    
-static  OS_STK         App_TaskComputerStk[APP_TASK_COMPUTER_STK_SIZE];
-#define  APP_TASK_COMPUTER_PRIO                               2
-
-#define  APP_TASK_Master_STK_SIZE                         64u
-static  OS_STK         App_TaskMasterStk[APP_TASK_Master_STK_SIZE];
-#define  APP_TASK_Master_PRIO                               1
-
-
-#define urgent_TASK_PRIO       			0 
-//ÉèÖÃÈÎÎñ¶ÑÕ»´óÐ¡
-#define urgent_STK_SIZE  		    		64
-//ÈÎÎñ¶ÑÕ»
-OS_STK urgent_TASK_STK[urgent_STK_SIZE];
 
 
 //ÈÎÎñº¯Êý
@@ -80,18 +60,9 @@ typedef struct
 
 /***************************************************/
 /* Private function prototypes -----------------------------------------------*/
-#if (OS_VIEW_MODULE == DEF_ENABLED)
-extern void  App_OSViewTaskCreate   (void);
-#endif
 
-static  void  App_TaskCreate		(void);
-static  void  App_TaskStart			(void		*p_arg);  
-extern  void  App_UCGUI_TaskCreate  (void);
-static  void  App_TaskLCD		(void		*p_arg); ;
-static  void  App_Taskcomputer	 (void		*p_arg );
-static  void  App_TaskMaster(void		*p_arg );
-static  void urgent_task(void *pdata);
 
+static  void  App_TaskLCD		() ;
 /*
 *********************************************************************************************************
 *                                                main()
@@ -141,55 +112,33 @@ void Init_ADC(void);
 
 static  void  GPIO_Configuration    (void);
 void allphase(float32_t *V,float32_t *I);
-u8 computer_gonglu(status_dis_node *dis_list,status_comm_node *comm_list,u8 *slave_dis,u8 *slave_comm);
+ computer_gonglu(float32_t testInput_V[],float32_t testInput_C[],float32_t testOutput[],float32_t reslut[]);
 
 
 /*****************************485_start*********************************************************/
 
 #define delay_time_base 1000                   //ÑÓÊ±ÊýÁ¿¼¶
 #define time_out 3000
-#define LEN_control 14
+#define LEN_control 3
 #define EN_USART2_RX 	1			//0,²»½ÓÊÕ;1,½ÓÊÕ.
 #define RS485_TX_EN_1		GPIO_SetBits(GPIOC, GPIO_Pin_12)	// 485Ä£Ê½¿ØÖÆ.0,½ÓÊÕ;1,·¢ËÍ.±¾¹¤³ÌÓÃPB15
 #define RS485_TX_EN_0		GPIO_ResetBits(GPIOC, GPIO_Pin_12)	// 485Ä£Ê½¿ØÖÆ.0,½ÓÊÕ;1,·¢ËÍ.±¾¹¤³ÌÓÃPB15
- OS_EVENT * RS485_STUTAS_MBOX_dis,* RS485_STUTAS_MBOX,* RS485_RT;			//	rs485ÓÊÏäÐÅºÅÁ¿
- OS_EVENT *computer_sem,*urgent_sem;			 //
 
-static u8 rs485buf[LEN_control];
-;//·¢ËÍ¿ØÖÆÐÅÏ¢
+//·¢ËÍ¿ØÖÆÐÅÏ¢
 
 
 u32 hand_light_existence;
 
-static u8 first_init=1;
 
 //½ÓÊÕµ½µÄÊý¾Ý³¤¶È
 u8 RS485_RX_CNT=0;  
 
 
 
- typedef struct  
-{ u8 start;
-  u8 myid;      //±¾µçÈÝÏäIDºÅ
-  u8 source;
-  u8 destination; //Ä¿µÄµçÈÝÏä
-  u8 send;      //ÊÇ·ñÊÇ·¢ËÍÃüÁî1ÎªÊÇ£¬0Îª²»ÊÇ
-  u8 relay;    //µÚ¼¸×éµçÈÝÆ÷
-  u8 message;     //¿ª¹ØÐÅÏ¢
-  u8 master;      //Ö÷»úÁîÅÆ
-u8 end;
-}box;
-static box mybox;
 u8 auto_on=1;
-void RS485_Init(u32 bound);
-void initmybox(void);//³õÊ¼»¯×ÔÉíÐÅÏ¢
 
-void UART4_IRQHandler(void);
 void EXTI9_5_IRQHandler(void);
 u16 comp_16(u16 a,u16 b);
-int rs485_trans_order(u8 *tx_r485);//½âÎöÓÉÖ÷»ú·¢ËÍ¹ýÀ´µÄÐÅºÅ£¬²¢·¢ËÍ¸øÏÂÎ»»ú
- void order_trans_rs485(u8 source,u8 destination, u8 send,u8 relay,u8 message,u8 ctr);//Ö÷»ú³ÌÐò£¬Ö÷»úÃüÁî½âÎö³ÉRS485ÐÅÏ¢£¬·¢ËÍ¸øÄ¿µÄ´Ó»ú
- void computer_trans_rs485(u8 source,u8 destination, u8 send,u8 relay,u8 message,u8 ctr);//Ö÷»ú³ÌÐò£¬Ö÷»ú¼ÆËã³öÀ´Êý¾Ý½âÎö³ÉRS485ÐÅÏ¢£¬·¢ËÍ¸øÄ¿µÄ´Ó»ú
 void NVIC_Configuration(void);
 void EXTI_Configuration(void);//³õÊ¼»¯º¯Êý
 
@@ -209,7 +158,6 @@ void EXTI_Configuration(void);//³õÊ¼»¯º¯Êý
 
 u16 var=0;
 
-u8  subswitchABC_onoff	 (u8 relay,u8 message ,u8 flag);
 void LIGHT_backligt_on(void);
 void LIGHT_backligt_off(void);
 
@@ -224,30 +172,15 @@ void delay_time(u32 time);
 
 /************************************TIME_end******************************************************/
 
-void init_Queue_dis(status_dis_node *dis_list,u8 *slave_dis);
-void change_Queue_dis(u8 abc,u8 Level, status_dis_node *dis_list,u8 *slave_dis);
-
-
 /************************************MAster data structure*******************/
-void scanf_slave_machine(status_dis_node *dis_list,status_comm_node *comm_list,u8 *slave_dis,u8 *slave_comm);
-u8 inquiry_slave_status_comm(u8 id,u8 *slave_comm,status_comm_node *comm_list); 
-void init_Queue(u8 id,u8 size_1,u8 size_2,u8 work_status_1,u8 work_status_2,u8 *slave_comm,status_comm_node *comm_list);
-void del_comm_listnode(u8 id,u8 group,u8 *slave_comm,status_comm_node *comm_list);
-void flash_comm_list(u8 id,u8 size ,u8 work_status ,u8 group,u8 *slave_comm,status_comm_node *comm_list);
-void change_Queue(u8 *slave_comm,status_comm_node *comm_list,u8 size);
-void init_listindex(u8 *slave_comm);
 
 
 
-
-/********************************************************************************/
- void rs485_trans_status_dis(u8 count,u8 *tx_r485,status_dis_node *dis_list,status_comm_node *comm_list);//Ö÷»ú³ÌÐò£¬Ö÷»úÃüÁî½âÎö³ÉRS485ÐÅÏ¢£¬·¢ËÍ¸øÄ¿µÄ´Ó»ú
- u8 inquiry_slave_status_dis(u8 count,u8 id,status_dis_node *dis_list,status_comm_node *comm_list);   
-void set_statuslist(u8 count,u8 id,u8 size,u8 work_status,u8 work_time,u8 dis_comm,u8 relay,status_dis_node *dis_list,status_comm_node *comm_list_1,status_comm_node *comm_list_2,u8 group);
 
 void set_bit(u8 b, u8 dis_com,light_status_node *light_status,u8 status_1,u8 status_2,u8 status_3,u8 status_4);
 u8 clear_bit(u8 b,u32 light_pad);
 void set_clear_existence(u8 true_false,u8 b,u32 *exist);
+void init_cap();
 
 /*************************************MAster data structure_end***************/
 
@@ -258,14 +191,10 @@ void set_clear_existence(u8 true_false,u8 b,u32 *exist);
 u8 L_C_flag_A=1;//¸ÐÐÔÈÝÐÔ±ê×¼±äÁ¿
 u8 L_C_flag_B=1;//¸ÐÐÔÈÝÐÔ±ê×¼±äÁ¿
 u8 L_C_flag_C=1;//¸ÐÐÔÈÝÐÔ±ê×¼±äÁ¿
-u16 hand_comm_onoff=0;//ÊÖ¶¯Í¶ÇÐ¹²²¹¿ª¹Ø×´Ì¬±äÁ¿
-u16 comm_number=0;//ÊÖ¶¯Í¶ÇÐ¹²²¹0Îª¼ÌµçÆ÷1ºÅ 1Îª¼ÌµçÆ÷2ºÅ
 
 #define TEST_LENGTH_SAMPLES 512*2 
  
 u8 phase_flag=0;
-u16 scan_init=0;
-u8 MASTER=1;
 u8 light_time=100;
 
 u8 delay_on=0,delay_off=0;
@@ -276,10 +205,16 @@ u8 delay_on_cont=1,delay_off_cont=1;
 
 extern u8 COMMCAT_para;
 //extern u8 CT_para;
-extern u8 capa1_array[32],capa2_array[32];
+   status_comm_node comm_list[34];
 
 u8 hand_id=1;
 u8 dis_com=1;
+
+ float32_t testInput_V[TEST_LENGTH_SAMPLES]; 
+ float32_t testInput_C[TEST_LENGTH_SAMPLES]; 
+
+float32_t testOutput[TEST_LENGTH_SAMPLES*2/2]; 
+float32_t reslut[TEST_LENGTH_SAMPLES/2]; 
 //u8 free_timeout_20=100;//ÂÖÐÝÊ±¼ä¿ØÖÆ±äÁ¿
 //u8 free_timeout_10=100;//ÂÖÐÝÊ±¼ä¿ØÖÆ±äÁ¿
 //u8 free_timeout_5=100;//ÂÖÐÝÊ±¼ä¿ØÖÆ±äÁ¿
@@ -289,49 +224,69 @@ u8 dis_com=1;
 INT32S main (void)
 {
 CPU_INT08U  os_err;
-	
-
+u8 i;	
 //CPU_IntDis();                   
 /***************  Init hardware ***************/
 //u8 i;
 
-    OS_CPU_SysTickInit();/* Initialize the SysTick.                              */
+   // OS_CPU_SysTickInit();/* Initialize the SysTick.                              */
 	delay_init();
-	delay_us(500000);
+//	delay_us(500000);
 NVIC_Configuration();
 GPIO_Configuration();
 
  //EXTI_Configuration();//³õÊ¼»¯º¯Êý
 
-initmybox();//³õÊ¼»¯×ÔÉíÐÅÏ¢
  init_light_off();
  LIGHT_backligt_on();
+init_cap();
 
-os_err = os_err; 
+while(1)
+{
+ App_TaskLCD();
+  {
+
+for(i=1;i<=32;i++)
+{
+
+/*¸üÐÂÖ¸Ê¾µÆ*/
+if(comm_list[i].size==0)
+{
+Light_pad_off(1,i,0,0,0);//Ö¸Ê¾µÆÊ¹ÓÃ
+	  	 set_bit(i, 1, &light_status, 0,0, 0,2);//ÊÖ¶¯Í¶ÇÐÊ¹ÓÃ
+		set_clear_existence(0,i,&hand_light_existence);
 
 
-   {
-		OSInit();                        
+}
+else
+{
+	 Light_pad_on(1,i,comm_list[i].work_status,comm_list[i].work_status,0);
+	 set_bit(i, 1, &light_status, comm_list[i].work_status,comm_list[i].work_status,0,0);//ÊÖ¶¯Í¶ÇÐÊ¹ÓÃ
+	 set_clear_existence(1,i,&hand_light_existence);
+
+}
+
+}
 
 
-	os_err = OSTaskCreateExt((void (*)(void *)) App_TaskStart,
-                             (void          * ) 0,
-                             (OS_STK        * )&App_TaskStartStk[APP_TASK_START_STK_SIZE - 1],
-                             (INT8U           ) APP_TASK_START_PRIO,
-                             (INT16U          ) APP_TASK_START_PRIO,
-                             (OS_STK        * )&App_TaskStartStk[0],
-                             (INT32U          ) APP_TASK_START_STK_SIZE,
-                             (void          * )0,
-                             (INT16U          )(OS_TASK_OPT_STK_CLR | OS_TASK_OPT_STK_CHK));
-                             
 
-#if OS_TASK_NAME_EN > 0
-    OSTaskNameSet(APP_TASK_START_PRIO, (CPU_INT08U *)"Start Task", &os_err);
-#endif
 
-	OSStart();                                               
-	return (0);
-     }
+
+
+if(COMMCAT_para==0) //×Ô¶¯Ä£Ê½
+{
+
+ computer_gonglu(testInput_V,testInput_C,testOutput,reslut);
+
+}
+
+    }
+
+//	delay_ms(100);
+
+}
+
+   
     
 /************************************************/
 
@@ -355,20 +310,7 @@ os_err = os_err;
 * Note(s)     : none.
 *********************************************************************************************************
 */	  
-static  void  App_TaskStart (void *p_arg)
-{   
-	(void)p_arg;
-	
 
-
-		OSStatInit();					//³õÊ¼»¯Í³¼ÆÈÎÎñ.ÕâÀï»áÑÓÊ±1ÃëÖÓ×óÓÒ	
-            App_TaskCreate();                                        /* Create application tasks.                            */
-	OSTaskSuspend(APP_TASK_START_PRIO);	//¹ÒÆðÆðÊ¼ÈÎÎñ.
-
-
-
-
-}
 
 /*
 *********************************************************************************************************
@@ -386,27 +328,7 @@ static  void  App_TaskStart (void *p_arg)
 *********************************************************************************************************
 */
 
-static  void  App_TaskCreate (void)
-{
-	
-CPU_INT08U  os_err;
 
-RS485_STUTAS_MBOX_dis=OSMboxCreate((void*)0);
-RS485_STUTAS_MBOX=OSMboxCreate((void*)0);
-computer_sem=OSSemCreate(0);
-RS485_RT=OSMboxCreate((void*)0);
-urgent_sem=OSSemCreate(0);
-                             
-
-#if OS_TASK_NAME_EN > 0
-    OSTaskNameSet(APP_TASK_START_PRIO, (CPU_INT08U *)"Start Task", &os_err);
-#endif
-	 	OSTaskCreate(App_TaskLCD,(void *)0,(OS_STK*)&App_TaskLCDStk[APP_TASK_LCD_STK_SIZE-1],APP_TASK_LCD_PRIO);	 				   
-		OSTaskCreate(App_Taskcomputer,(void *)0,(OS_STK*)&App_TaskComputerStk[APP_TASK_COMPUTER_STK_SIZE-1],APP_TASK_COMPUTER_PRIO);	 				   
-//	 	OSTaskCreate(App_TaskMaster,(void *)0,(OS_STK*)&App_TaskMasterStk[APP_TASK_Master_STK_SIZE-1],APP_TASK_Master_PRIO);	 				   
-//OSTaskCreate(urgent_task,(void *)0,(OS_STK*)&urgent_TASK_STK[urgent_STK_SIZE-1],urgent_TASK_PRIO);
-
-     }
 
 /*
 *********************************************************************************************************
@@ -423,42 +345,6 @@ urgent_sem=OSSemCreate(0);
 * Note(s)     : none.
 *********************************************************************************************************
 */	  
-static  void  App_TaskMaster(void		*p_arg )
-{
-u8 i;
-// static status_dis_node     dis_list[10];
- //static status_comm_node comm_list[10];
-	for(;;)
-		{ 
-
-
- if(MASTER==1)
- 	{
- 	
-
-OSSemPost(computer_sem);
-if(KEY_2==1)
-	{
-	}
-
-
-
-	
- 	}
-
-
-
-delay_ms(100);
-delay_ms(100);
-
-
-delay_ms(100);
-
-	        }
-   	
-}
-
-
 
 
 
@@ -481,13 +367,13 @@ delay_ms(100);
 * Note(s)     : none.
 *********************************************************************************************************
 */	  
-static  void  App_TaskLCD	 (void		*p_arg )
+static  void  App_TaskLCD	 ()
 {  
 
 u8 status_1,status_2,status_3,status_4;
 u8 exist;
 u8 i;
-	for(;;)
+	//for(;;)
 		{  ParaSet();
 	if(COMMCAT_para==1)
 {
@@ -520,7 +406,6 @@ u8 i;
 	         if(exist==1)
 			 	{
 			 	hand_id=i;
-				hand_comm_onoff=0;
 				break;
 				}
 	 
@@ -555,7 +440,6 @@ u8 i;
 	         if(exist==1)
 			 	{
 			 	hand_id=i;
-				hand_comm_onoff=0;
 				break;
 				}
 	 
@@ -587,7 +471,6 @@ if(Work_Flag==0)Light_pad_off(dis_com,hand_id,2,2,2);
 
 }
 
-                     delay_ms(200);//10
 
 	        }
    	
@@ -608,92 +491,9 @@ if(Work_Flag==0)Light_pad_off(dis_com,hand_id,2,2,2);
 * Note(s)     : none.
 *********************************************************************************************************
 */	  
-static  void  App_Taskcomputer	 (void		*p_arg )
-
-{  
-u8 i;
-u8 err;
- static status_dis_node     dis_list[20];
-
-static  u8 slave_dis[20];
-static  u8 slave_comm[20];
-static status_comm_node comm_list[78];
-/*
- static status_dis_node     dis_list[20];
-
-static  u8 slave_dis[10];
-static  u8 slave_comm[10];
-static status_comm_node comm_list[70];
-*/
-for(;;)
-   	{
-   //	OSSemPend(computer_sem,0,&err);
-#if (FUNCTION_MODULE == DF_THREE)
-if(first_init==1)
-{
-for(i=1;i<=32;i++)
-{
-comm_list[i].myid=i;
-comm_list[i].work_status=0;
- Light_pad_on(dis_com,i,0,0,0);
-
-}
-rs485buf[1]=1;
-rs485buf[2]=1;
-first_init=0;
-}
- //scanf_slave_machine(dis_list,comm_list,slave_dis,slave_comm);
-  //init_Queue_dis(dis_list,slave_dis);
-for(i=1;i<=32;i++)
-{
-comm_list[i].size=capa1_array[i-1];
-/*¸üÐÂÖ¸Ê¾µÆ*/
-if(comm_list[i].size==0)
-{
-Light_pad_off(1,i,0,0,0);//Ö¸Ê¾µÆÊ¹ÓÃ
-	  	 set_bit(i, 1, &light_status, 0,0, 0,2);//ÊÖ¶¯Í¶ÇÐÊ¹ÓÃ
-		set_clear_existence(0,i,&hand_light_existence);
-
-
-}
-else
-{
-	 Light_pad_on(1,i,comm_list[i].work_status,comm_list[i].work_status,0);
-	 set_bit(i, 1, &light_status, comm_list[i].work_status,comm_list[i].work_status,0,0);//ÊÖ¶¯Í¶ÇÐÊ¹ÓÃ
-	 set_clear_existence(1,i,&hand_light_existence);
-
-}
-
-}
 
 
 
-
-
-
-if(COMMCAT_para==0) //×Ô¶¯Ä£Ê½
-{
-
- computer_gonglu(dis_list,comm_list,slave_dis,slave_comm);
-
-}
-delay_ms(10);
-#endif
-
-    }	
-   	
-
-
-
-
-
-
-
-
-
-
-
-}
 
 /*
 *********************************************************************************************************
@@ -733,22 +533,8 @@ delay_ms(10);
 * Note(s)     : none.
 *********************************************************************************************************
 */
-void urgent_task(void *pdata)
-
-{
-u8 err;
-
-          while(1)
-          	{
-       	OSSemPend(urgent_sem,0,&err);      	
-//{order_trans_rs485(mybox.myid,0,1,1,0,CONTROL);order_trans_rs485(mybox.myid,0,1,2,0,CONTROL);}
-	
- 	
 
 
-		  }
-
-}
 
 
 
@@ -770,7 +556,16 @@ u8 err;
 * Note(s)     : none.
 *********************************************************************************************************
 */
-
+void init_cap()
+{
+int i;
+for(i=1;i<=32;i++)
+{
+comm_list[i].size= AT24CXX_ReadOneByte(0x0010+(i-1)*2);
+comm_list[i].work_status=0;
+ Light_pad_on(dis_com,i,0,0,0);
+}
+}
 
 
 
@@ -843,15 +638,8 @@ AT24CXX_Init();
 	CH452_Init();
 
 /***********************²ÉÑùºÍDMA**************************************/	
-#if (FUNCTION_MODULE == DF_THREE)
-//ADC2_CH8_DMA_Config_VEE();
-//Init_ADC();
-#endif
-
 /********************485****************************************/	
 /************************************************************/
-//IWDG_Init(4,625); 
-
 
 /*************************TIME*******************************/
 TIM4_Int_Init(4999,7199);//10KhzµÄ¼ÆÊýÆµÂÊ£¬¼ÆÊý10K´ÎÎª1000ms 
@@ -1156,43 +944,6 @@ DMA_InitStructure.DMA_Channel = DMA_Channel_0;
 
 
 /********************************C_phase_end*********************************/
-void RS485_Init(u32 bound)
-
-{}
-
-		void UART4_IRQHandler(void)
-			{}
-
-void RS485_Send_Data(u8 *buf,u8 len)
-{}
-
-int rs485_trans_order(u8 *tx_r485)//½âÎöÓÉÖ÷»ú·¢ËÍ¹ýÀ´µÄÐÅºÅ£¬²¢·¢ËÍ¸øÏÂÎ»»ú
-{}
-
- void order_trans_rs485(u8 source,u8 destination, u8 send,u8 relay,u8 message,u8 ctr)//Ö÷»ú³ÌÐò£¬Ö÷»úÃüÁî½âÎö³ÉRS485ÐÅÏ¢£¬·¢ËÍ¸øÄ¿µÄ´Ó»ú
- 	{}
-
- 
- void computer_trans_rs485(u8 source,u8 destination, u8 send,u8 relay,u8 message,u8 ctr)//Ö÷»ú³ÌÐò£¬Ö÷»ú¼ÆËã³öÀ´Êý¾Ý½âÎö³ÉRS485ÐÅÏ¢£¬·¢ËÍ¸øÄ¿µÄ´Ó»ú
-
- 	{}
-
- void heartbeat(u8 t)
-{	/*u8 i;
-for(i=0;i<=t;i++)
-		{	
-	       order_trans_rs485(mybox.myid,0,0,0,0);
-		    delay_ms(1);
-		}	
-*/
-}
-
- 
-void delay_time(u32 time)
-{ heartbeat(time);
-}    //±¾ÏµÍ³µÄÑÓÊ±º¯Êý£¬time*1ms
-
-
 
 
 u16 comp_16(u16 a,u16 b)
@@ -1202,740 +953,25 @@ value=((a&0x00FF)+((b<<8)&0xFF00));
 return value;
 }
 
-void initmybox()//³õÊ¼»¯×ÔÉíÐÅÏ¢
-{  	 
-  int i;
-  mybox.master=0;
-  mybox.myid=0;
- mybox.source=0;
- mybox.destination=0;
- mybox.send=0;
- mybox.relay=0;
- mybox.message=0;
-for(i=1;i<=32;i++)
-capa1_array[i-1] = AT24CXX_ReadOneByte(0x0010+(i-1)*2);  //´æ´¢DELAY_ON_paraµ½eeprom
-	
 
-}
 
-/*
-void init_para(void)
-{
- u8 DELAY_ON_para=10;
- u8 DELAY_OFF_para=10;
- u8 COS_ON_para=90;
- u8 COS_OFF_para=95;
- u8 V_PROT_para_L=40;
- u8 V_PROT_para_tri=40;
- u8 HU_PROT_para=100;
- u8 HI_PROT_para=100;
 
-{
 
-
-
-DELAY_ON_para=AT24CXX_ReadOneByte(0x1000);  //´æ´¢DELAY_ON_paraµ½eeprom
-
-		 DELAY_OFF_para=AT24CXX_ReadOneByte(0x2000);  //´æ´¢DELAY_OFF_paraµ½eeprom
-
-		 COS_ON_para=AT24CXX_ReadOneByte(0x3000);  //´æ´¢DELAY_OFF_paraµ½eeprom
-					 COS_OFF_para=AT24CXX_ReadOneByte(0x4000);  //´æ´¢DELAY_OFF_paraµ½eeprom
-
-		V_PROT_para_L=AT24CXX_ReadOneByte(0xb000);
-		V_PROT_para_tri=AT24CXX_ReadOneByte(0xc000);
-
-			HU_PROT_para=AT24CXX_ReadOneByte(0x7000); 
-       HI_PROT_para=AT24CXX_ReadOneByte(0x8000); 
-		
-	  
-
- }	 
-
-}
-*/
-void set_statuslist(u8 count,u8 id,u8 size,u8 work_status,u8 work_time,u8 dis_comm,u8 relay,status_dis_node *dis_list,status_comm_node *comm_list_1,status_comm_node *comm_list_2,u8 group)
-{
-if(dis_comm==0)
-{
-if(relay==1)
-        {
-       dis_list[count].myid[0]=id;
-   	   dis_list[count].size[0]=size;
-   	   dis_list[count].work_status[0]=work_status;
-	     ///    Light_pad_onoff(1,id,work_status,3,3);
-
-       }
-if(relay==2)
-        {
-	dis_list[count].myid[1]=id;
-   	   dis_list[count].size[1]=size;
-   	   dis_list[count].work_status[1]=work_status;
-	  ///       Light_pad_onoff(1,id,3,work_status,3);
-
-       }
-if(relay==3)
-        {
-       dis_list[count].myid[2]=id;
-   	   dis_list[count].size[2]=size;
-   	   dis_list[count].work_status[2]=work_status;
-	  ///       Light_pad_onoff(1,id,3,3,work_status);
-
-       }
-}
-if(dis_comm==1)
-{
-  if(relay==1)
-  	{
-	   comm_list_1[count].myid=id;
-   	   comm_list_1[count].size=size;
-   	   comm_list_1[count].work_status=work_status;
-	   comm_list_1[count].group=group;
-      // comm_list[count].work_time[0]=work_time;
-  ///    Light_pad_onoff(2,id,work_status,3,3);
-  	}
-  if(relay==2)
-  	{
-	   comm_list_2[count].myid=id;
-   	   comm_list_2[count].size=size;
-   	   comm_list_2[count].work_status=work_status;
-	   comm_list_2[count].group=group;
-      // comm_list[count].work_time[1]=work_time;
-    ///        Light_pad_onoff(2,id,3,work_status,3);
-
-  	}  
-}
-
-}
-/****************************************************************************************************/
-void init_Queue(u8 id,u8 size_1,u8 size_2,u8 work_status_1,u8 work_status_2,u8 *slave_comm,status_comm_node *comm_list)
-{
-u8 i=0;
-{
-  if(size_1==2)
-  	{
-  	for(i=slave_comm[9];i>slave_comm[8];i--)//20µÄ¶ÓÁÐÒÆ¶¯
-  		{
-	   comm_list[i].myid=comm_list[i-1].myid;
-   	   comm_list[i].size=comm_list[i-1].size;
-   	   comm_list[i].work_status=comm_list[i-1].work_status;
-	   comm_list[i].group=comm_list[i-1].group;
-  		}
-	slave_comm[9]++;
-
-	  	for(i=slave_comm[7];i>slave_comm[6];i--)//10µÄ¶ÓÁÐÒÆ¶¯
-  		{
-	   comm_list[i].myid=comm_list[i-1].myid;
-   	   comm_list[i].size=comm_list[i-1].size;
-   	   comm_list[i].work_status=comm_list[i-1].work_status;
-	   comm_list[i].group=comm_list[i-1].group;
-  		}
-		slave_comm[7]++;
-			
-	  	for(i=slave_comm[5];i>slave_comm[4];i--)//5µÄ¶ÓÁÐÒÆ¶¯
-  		{
-	   comm_list[i].myid=comm_list[i-1].myid;
-   	   comm_list[i].size=comm_list[i-1].size;
-   	   comm_list[i].work_status=comm_list[i-1].work_status;
-	   comm_list[i].group=comm_list[i-1].group;
-  		}	
-slave_comm[5]++;
-		
-	   comm_list[slave_comm[3]].myid=id;
-   	   comm_list[slave_comm[3]].size=size_1;
-   	   comm_list[slave_comm[3]].work_status=work_status_1;
-	   comm_list[slave_comm[3]].group=1;
-
-		 slave_comm[3]++;
-		slave_comm[4]=slave_comm[3]+1;
-		slave_comm[6]=slave_comm[5]+1;
-		slave_comm[8]=slave_comm[7]+1;
-
-		 slave_comm[0]++;
-
-  }
-  
-    if(size_1==5)
-  	{
-  		for(i=slave_comm[9];i>slave_comm[8];i--)//20µÄ¶ÓÁÐÒÆ¶¯
-  		{
-	   comm_list[i].myid=comm_list[i-1].myid;
-   	   comm_list[i].size=comm_list[i-1].size;
-   	   comm_list[i].work_status=comm_list[i-1].work_status;
-	   comm_list[i].group=comm_list[i-1].group;
-  		}
-	slave_comm[9]++;
-
-	  	for(i=slave_comm[7];i>slave_comm[6];i--)//10µÄ¶ÓÁÐÒÆ¶¯
-  		{
-	   comm_list[i].myid=comm_list[i-1].myid;
-   	   comm_list[i].size=comm_list[i-1].size;
-   	   comm_list[i].work_status=comm_list[i-1].work_status;
-	   comm_list[i].group=comm_list[i-1].group;
-  		}
-		slave_comm[7]++;
-		
-	   comm_list[slave_comm[5]].myid=id;
-   	   comm_list[slave_comm[5]].size=size_1;
-   	   comm_list[slave_comm[5]].work_status=work_status_1;
-	   comm_list[slave_comm[5]].group=1;
-
-	    slave_comm[5]++;
-		slave_comm[6]=slave_comm[5]+1;
-		slave_comm[8]=slave_comm[7]+1;
-		 slave_comm[0]++;
-
-  	} 
-	if(size_1==10)
-  	{
-  		for(i=slave_comm[9];i>slave_comm[8];i--)//20µÄ¶ÓÁÐÒÆ¶¯
-  		{
-	   comm_list[i].myid=comm_list[i-1].myid;
-   	   comm_list[i].size=comm_list[i-1].size;
-   	   comm_list[i].work_status=comm_list[i-1].work_status;
-	   comm_list[i].group=comm_list[i-1].group;
-  		}
-	slave_comm[9]++;
-	
-	   comm_list[slave_comm[7]].myid=id;
-   	   comm_list[slave_comm[7]].size=size_1;
-   	   comm_list[slave_comm[7]].work_status=work_status_1;
-	   comm_list[slave_comm[7]].group=1;
-
-	       slave_comm[7]++;
-		slave_comm[8]=slave_comm[7]+1;
-		 slave_comm[0]++;
-
-  	} 
-	if(size_1==20)
-  	{
-	   comm_list[slave_comm[9]].myid=id;
-   	   comm_list[slave_comm[9]].size=size_1;
-   	   comm_list[slave_comm[9]].work_status=work_status_1;
-	   comm_list[slave_comm[9]].group=1;
-	   	    slave_comm[9]++;
-		 slave_comm[0]++;
-
-  	}
-}
-
-
-
-{
-  if(size_2==2)
-  	{
-  	for(i=slave_comm[9];i>slave_comm[8];i--)//20µÄ¶ÓÁÐÒÆ¶¯
-  		{
-	   comm_list[i].myid=comm_list[i-1].myid;
-   	   comm_list[i].size=comm_list[i-1].size;
-   	   comm_list[i].work_status=comm_list[i-1].work_status;
-	   comm_list[i].group=comm_list[i-1].group;
-  		}
-	slave_comm[9]++;
-
-	  	for(i=slave_comm[7];i>slave_comm[6];i--)//10µÄ¶ÓÁÐÒÆ¶¯
-  		{
-	   comm_list[i].myid=comm_list[i-1].myid;
-   	   comm_list[i].size=comm_list[i-1].size;
-   	   comm_list[i].work_status=comm_list[i-1].work_status;
-	   comm_list[i].group=comm_list[i-1].group;
-  		}
-		slave_comm[7]++;
-			
-	  	for(i=slave_comm[5];i>slave_comm[4];i--)//5µÄ¶ÓÁÐÒÆ¶¯
-  		{
-	   comm_list[i].myid=comm_list[i-1].myid;
-   	   comm_list[i].size=comm_list[i-1].size;
-   	   comm_list[i].work_status=comm_list[i-1].work_status;
-	   comm_list[i].group=comm_list[i-1].group;
-  		}	
-slave_comm[5]++;
-		
-	   comm_list[slave_comm[3]].myid=id;
-   	   comm_list[slave_comm[3]].size=size_2;
-   	   comm_list[slave_comm[3]].work_status=work_status_2;
-	   comm_list[slave_comm[3]].group=2;
-
-		 slave_comm[3]++;
-		slave_comm[4]=slave_comm[3]+1;
-		slave_comm[6]=slave_comm[5]+1;
-		slave_comm[8]=slave_comm[7]+1;
-
-		 slave_comm[0]++;
-
-  }
-  
-    if(size_2==5)
-  	{
-  		for(i=slave_comm[9];i>slave_comm[8];i--)//20µÄ¶ÓÁÐÒÆ¶¯
-  		{
-	   comm_list[i].myid=comm_list[i-1].myid;
-   	   comm_list[i].size=comm_list[i-1].size;
-   	   comm_list[i].work_status=comm_list[i-1].work_status;
-	   comm_list[i].group=comm_list[i-1].group;
-  		}
-	slave_comm[9]++;
-
-	  	for(i=slave_comm[7];i>slave_comm[6];i--)//10µÄ¶ÓÁÐÒÆ¶¯
-  		{
-	   comm_list[i].myid=comm_list[i-1].myid;
-   	   comm_list[i].size=comm_list[i-1].size;
-   	   comm_list[i].work_status=comm_list[i-1].work_status;
-	   comm_list[i].group=comm_list[i-1].group;
-  		}
-		slave_comm[7]++;
-		
-	   comm_list[slave_comm[5]].myid=id;
-   	   comm_list[slave_comm[5]].size=size_2;
-   	   comm_list[slave_comm[5]].work_status=work_status_2;
-	   comm_list[slave_comm[5]].group=2;
-
-	    slave_comm[5]++;
-		slave_comm[6]=slave_comm[5]+1;
-		slave_comm[8]=slave_comm[7]+1;
-		 slave_comm[0]++;
-
-  	} 
-	if(size_2==10)
-  	{
-  		for(i=slave_comm[9];i>slave_comm[8];i--)//20µÄ¶ÓÁÐÒÆ¶¯
-  		{
-	   comm_list[i].myid=comm_list[i-1].myid;
-   	   comm_list[i].size=comm_list[i-1].size;
-   	   comm_list[i].work_status=comm_list[i-1].work_status;
-	   comm_list[i].group=comm_list[i-1].group;
-  		}
-	slave_comm[9]++;
-	
-	   comm_list[slave_comm[7]].myid=id;
-   	   comm_list[slave_comm[7]].size=size_2;
-   	   comm_list[slave_comm[7]].work_status=work_status_2;
-	   comm_list[slave_comm[7]].group=2;
-
-	       slave_comm[7]++;
-		slave_comm[8]=slave_comm[7]+1;
-		 slave_comm[0]++;
-
-  	} 
-	if(size_2==20)
-  	{
-	   comm_list[slave_comm[9]].myid=id;
-   	   comm_list[slave_comm[9]].size=size_2;
-   	   comm_list[slave_comm[9]].work_status=work_status_2;
-	   comm_list[slave_comm[9]].group=2;
-	   	    slave_comm[9]++;
-		 slave_comm[0]++;
-
-  	}
-}
-
-}
-
-void init_listindex(u8 *slave_comm)
-{
-slave_comm[2]=0;//¶ÓÁÐ2v ±êÊ¾³õÊ¼»¯
-slave_comm[3]=0;
-
-slave_comm[4]=1;//¶ÓÁÐ5v ±êÊ¾³õÊ¼»¯
-slave_comm[5]=1;
-
-slave_comm[6]=2;//¶ÓÁÐ10v ±êÊ¾³õÊ¼»¯
-slave_comm[7]=2;
-
-slave_comm[8]=3;//¶ÓÁÐ20v ±êÊ¾³õÊ¼»¯
-slave_comm[9]=3;
-
-}
-
-void change_Queue(u8 *slave_comm,status_comm_node *comm_list,u8 size)
-{
-
-u8 i=0;
-u8 m,s,w,g;
-{
-  if(size==2)
-  	{
-  	m=comm_list[slave_comm[2]].myid;
-	s=comm_list[slave_comm[2]].size;
-	w=comm_list[slave_comm[2]].work_status;
-	g=comm_list[slave_comm[2]].group;
-
-	for(i=slave_comm[2];i<slave_comm[3]-1;i++)// 2 µÄ¶ÓÁÐÒÆ¶¯
-  		{
-	   comm_list[i].myid=comm_list[i+1].myid;
-   	   comm_list[i].size=comm_list[i+1].size;
-   	   comm_list[i].work_status=comm_list[i+1].work_status;
-	   comm_list[i].group=comm_list[i+1].group;
-  		}
-
-		
-	   comm_list[slave_comm[3]-1].myid=m;
-   	   comm_list[slave_comm[3]-1].size=s;
-   	   comm_list[slave_comm[3]-1].work_status=w;
-	   comm_list[slave_comm[3]-1].group=g;
-
-  	}
-  
-    if(size==5)
-    	{
-  	m=comm_list[slave_comm[4]].myid;
-	s=comm_list[slave_comm[4]].size;
-	w=comm_list[slave_comm[4]].work_status;
-	g=comm_list[slave_comm[4]].group;
-
-	for(i=slave_comm[4];i<slave_comm[5]-1;i++)//20µÄ¶ÓÁÐÒÆ¶¯
-  		{
-	   comm_list[i].myid=comm_list[i+1].myid;
-   	   comm_list[i].size=comm_list[i+1].size;
-   	   comm_list[i].work_status=comm_list[i+1].work_status;
-	   comm_list[i].group=comm_list[i+1].group;
-  		}
-
-		
-	   comm_list[slave_comm[5]-1].myid=m;
-   	   comm_list[slave_comm[5]-1].size=s;
-   	   comm_list[slave_comm[5]-1].work_status=w;
-	   comm_list[slave_comm[5]-1].group=g;
-
-  	}
-	if(size==10)
-  	{
-  	m=comm_list[slave_comm[6]].myid;
-	s=comm_list[slave_comm[6]].size;
-	w=comm_list[slave_comm[6]].work_status;
-	g=comm_list[slave_comm[6]].group;
-
-	for(i=slave_comm[6];i<slave_comm[7]-1;i++)//20µÄ¶ÓÁÐÒÆ¶¯
-  		{
-	   comm_list[i].myid=comm_list[i+1].myid;
-   	   comm_list[i].size=comm_list[i+1].size;
-   	   comm_list[i].work_status=comm_list[i+1].work_status;
-	   comm_list[i].group=comm_list[i+1].group;
-  		}
-
-		
-	   comm_list[slave_comm[7]-1].myid=m;
-   	   comm_list[slave_comm[7]-1].size=s;
-   	   comm_list[slave_comm[7]-1].work_status=w;
-	   comm_list[slave_comm[7]-1].group=g;
-
-  	} 
-	if(size==20)
-  	{
-  	m=comm_list[slave_comm[8]].myid;
-	s=comm_list[slave_comm[8]].size;
-	w=comm_list[slave_comm[8]].work_status;
-	g=comm_list[slave_comm[8]].group;
-
-	for(i=slave_comm[8];i<slave_comm[9]-1;i++)//20µÄ¶ÓÁÐÒÆ¶¯
-  		{
-	   comm_list[i].myid=comm_list[i+1].myid;
-   	   comm_list[i].size=comm_list[i+1].size;
-   	   comm_list[i].work_status=comm_list[i+1].work_status;
-	   comm_list[i].group=comm_list[i+1].group;
-  		}
-
-		
-	   comm_list[slave_comm[9]-1].myid=m;
-   	   comm_list[slave_comm[9]-1].size=s;
-   	   comm_list[slave_comm[9]-1].work_status=w;
-	   comm_list[slave_comm[9]-1].group=g;
-
-  	}
-}
-}
-/***********************************************
-void flash_comm_list(u8 id,u8 size ,u8 work_status ,u8 group,u8 *slave_comm,status_comm_node *comm_list)
-½Úµã×´Ì¬¸üÐÂº¯Êý
-
-
-*********************************************/
-void flash_comm_list(u8 id,u8 size ,u8 work_status ,u8 group,u8 *slave_comm,status_comm_node *comm_list)
-{
-u8 i;
-if(size==2)
-{
-	for(i=slave_comm[2];i<slave_comm[3];i++)// 2 
-	{
-	if(id==comm_list[i].myid&&group==comm_list[i].group)//Ëø¶¨½Úµã½øÐÐ¸üÐÂ
-		{
-	   comm_list[i].myid=id;
-   	   comm_list[i].size=size;
-   	   comm_list[i].work_status=work_status;
-	   comm_list[i].group=group;
-	   break;
-		}
-	}
-}
-
-if(size==5)
-{
-	for(i=slave_comm[4];i<slave_comm[5];i++)// 2 
-	{
-	if(id==comm_list[i].myid&&group==comm_list[i].group)//Ëø¶¨½Úµã½øÐÐ¸üÐÂ
-		{
-	   comm_list[i].myid=id;
-   	   comm_list[i].size=size;
-   	   comm_list[i].work_status=work_status;
-	   comm_list[i].group=group;
-	   break;
-		}
-	}
-}
-
-if(size==10)
-{
-	for(i=slave_comm[6];i<slave_comm[7];i++)// 2 
-	{
-	if(id==comm_list[i].myid&&group==comm_list[i].group)//Ëø¶¨½Úµã½øÐÐ¸üÐÂ
-		{
-	   comm_list[i].myid=id;
-   	   comm_list[i].size=size;
-   	   comm_list[i].work_status=work_status;
-	   comm_list[i].group=group;
-	   break;
-		}
-	}
-}
-
-if(size==20)
-{
-	for(i=slave_comm[8];i<slave_comm[9];i++)// 2 
-	{
-	if(id==comm_list[i].myid&&group==comm_list[i].group)//Ëø¶¨½Úµã½øÐÐ¸üÐÂ
-		{
-	   comm_list[i].myid=id;
-   	   comm_list[i].size=size;
-   	   comm_list[i].work_status=work_status;
-	   comm_list[i].group=group;
-	   break;
-		}
-	}
-}
-}
-
-void del_comm_listnode(u8 id,u8 group,u8 *slave_comm,status_comm_node *comm_list)
-{
-u8 i=0;
-u8 j=0;
-  	
-{
-  	  		for(i=slave_comm[2];i<=slave_comm[9]-1;i++)//2
-	if(id==comm_list[i].myid&&group==comm_list[i].group)//Ëø¶¨½Úµã½øÐÐ¸üÐÂ
-		{ 
-
-	
-		for(j=i;j<slave_comm[9]-1;j++)
-		      {
-		         comm_list[j].myid=comm_list[j+1].myid;
-   	   comm_list[j].size=comm_list[j+1].size;
-   	   comm_list[j].work_status=comm_list[j+1].work_status;
-	   comm_list[j].group=comm_list[j+1].group;
-		      }
-	       if(i<slave_comm[3])
-		   	{
-                         {
-			slave_comm[3]--;
-	             comm_list[slave_comm[3]].myid=0;
-   	               comm_list[slave_comm[3]].size=0;
-   	                comm_list[slave_comm[3]].work_status=0;
-	              comm_list[slave_comm[3]].group=0;
-
-		          }	
-		   
-                      {
-			slave_comm[4]--;					  	
-			slave_comm[5]--;
-	             comm_list[slave_comm[5]].myid=0;
-   	               comm_list[slave_comm[5]].size=0;
-   	                comm_list[slave_comm[5]].work_status=0;
-	              comm_list[slave_comm[5]].group=0;
-
-		          }	
-				  
-                      {
-			slave_comm[6]--;					  	
-			slave_comm[7]--;
-	             comm_list[slave_comm[7]].myid=0;
-   	               comm_list[slave_comm[7]].size=0;
-   	                comm_list[slave_comm[7]].work_status=0;
-	              comm_list[slave_comm[7]].group=0;
-
-		          }			
-				  
-	             {
-			slave_comm[8]--;				 	
-			slave_comm[9]--;
-	             comm_list[slave_comm[9]].myid=0;
-   	               comm_list[slave_comm[9]].size=0;
-   	                comm_list[slave_comm[9]].work_status=0;
-	              comm_list[slave_comm[9]].group=0;
-
-		          }
-		   	}
-		else if(i<slave_comm[5]&&i>slave_comm[3])
-			{
-                         	   
-                      {
-			slave_comm[5]--;
-	             comm_list[slave_comm[5]].myid=0;
-   	               comm_list[slave_comm[5]].size=0;
-   	                comm_list[slave_comm[5]].work_status=0;
-	              comm_list[slave_comm[5]].group=0;
-
-		          }	
-				  
-                      {
-			slave_comm[6]--;					  	
-			slave_comm[7]--;
-	             comm_list[slave_comm[7]].myid=0;
-   	               comm_list[slave_comm[7]].size=0;
-   	                comm_list[slave_comm[7]].work_status=0;
-	              comm_list[slave_comm[7]].group=0;
-
-		          }			
-				  
-	             {
-			slave_comm[8]--;				 	
-			slave_comm[9]--;
-	             comm_list[slave_comm[9]].myid=0;
-   	               comm_list[slave_comm[9]].size=0;
-   	                comm_list[slave_comm[9]].work_status=0;
-	              comm_list[slave_comm[9]].group=0;
-
-		          }
-		   	}
-		else if(i<slave_comm[7]&&i>slave_comm[5])
-			{
-                         		  
-                      {
-			slave_comm[7]--;
-	             comm_list[slave_comm[7]].myid=0;
-   	               comm_list[slave_comm[7]].size=0;
-   	                comm_list[slave_comm[7]].work_status=0;
-	              comm_list[slave_comm[7]].group=0;
-
-		          }			
-				  
-	             {
-			slave_comm[8]--;				 	
-			slave_comm[9]--;
-	             comm_list[slave_comm[9]].myid=0;
-   	               comm_list[slave_comm[9]].size=0;
-   	                comm_list[slave_comm[9]].work_status=0;
-	              comm_list[slave_comm[9]].group=0;
-
-		          }
-		   	}
-		else if(i<slave_comm[9]&&i>slave_comm[7])
-			{
-							  
-	             {
-			slave_comm[9]--;
-	             comm_list[slave_comm[9]].myid=0;
-   	               comm_list[slave_comm[9]].size=0;
-   	                comm_list[slave_comm[9]].work_status=0;
-	              comm_list[slave_comm[9]].group=0;
-
-		          }
-		   	}
-
-break;
-	}
-
-
-
-		 
-  	 
-  	
-}
-
-}
-
-/**********************/
-u8 inquiry_slave_status_comm(u8 id,u8 *slave_comm,status_comm_node *comm_list)   
-  {  u8 *msg;
-        u8 err;
-	
-
-   order_trans_rs485(mybox.myid,id,3,0,0,CONTROL);
-   msg=(u8 *)OSMboxPend(RS485_STUTAS_MBOX,OS_TICKS_PER_SEC/10,&err);
-   if(err==OS_ERR_TIMEOUT)
-   	{ return 0;}//(u8 id, u8 size, u8 work_status, u8 work_time) 
-	else 
-	{ 
-if(msg[2]==id)
-		{
- init_Queue(id,msg[3],msg[4],msg[5],msg[6],slave_comm,comm_list);
-		
-	return 1;
-		}
-else return 0;
-	}
-
-} //²éÑ¯´Ó»ú×´Ì¬²¢±£´æµ½´Ó»ú×´Ì¬±íÖÐ£¬²ÎÊýidÊÇÒª²éÑ¯µÄ´Ó»úºÅ
-
-
-/**********************************/
- u8 inquiry_slave_status_dis(u8 count,u8 id,status_dis_node *dis_list,status_comm_node *comm_list)   
-  {  u8 *msg;
-        u8 err;
-/*		
-			if(id==mybox.myid)
-		{
-set_statuslist(id,status_box.size[0],status_box.work_status[0],status_box.work_time[0],0,1,dis_list,comm_list);
-set_statuslist(id,status_box.size[1],status_box.work_status[1],status_box.work_time[1],0,2,dis_list,comm_list);
-set_statuslist(id,status_box.size[2],status_box.work_status[2],status_box.work_time[2],0,3,dis_list,comm_list);
-
-return 1;
-		}
-	*/		
-{
- computer_trans_rs485(mybox.myid,id,2,0,0,CONTROL);
-  // order_trans_rs485(mybox.myid,id,2,0,0);
-
-   msg=(u8 *)OSMboxPend(RS485_STUTAS_MBOX_dis,OS_TICKS_PER_SEC/10,&err);
-   if(err==OS_ERR_TIMEOUT)
-   	{
-          return 0;
-   }//(u8 id, u8 size, u8 work_status, u8 work_time) 
-	else 
-	{ 
-	if(msg[2]==id)//¼ì²é´«¹ýÀ´µÄ´Ó»úµÄ×´Ì¬ÐÅÏ¢ÊÇ·ñÕæÊÇ¸Ã´Ó»úµÄ¡£Èç¹û²»ÊÇ¾Í²»Â¼Èë
-		{
-	rs485_trans_status_dis(count,msg,dis_list,comm_list);//Ö÷»ú×´Ì¬ÐÅÏ¢Ð´Èë×´Ì¬±í
-	return 1;
-		}
-	else return 0;
-	}
-
-}
-} //²éÑ¯´Ó»ú×´Ì¬²¢±£´æµ½´Ó»ú×´Ì¬±íÖÐ£¬²ÎÊýidÊÇÒª²éÑ¯µÄ´Ó»úºÅ
-/**********************/
 
 /**************/
- void rs485_trans_status_dis(u8 count,u8 *tx_r485,status_dis_node *dis_list,status_comm_node *comm_list)//Ö÷»ú³ÌÐò£¬Ö÷»úÃüÁî½âÎö³ÉRS485ÐÅÏ¢£¬·¢ËÍ¸øÄ¿µÄ´Ó»ú
- 	{
- 	 set_statuslist(count,tx_r485[2],tx_r485[3],tx_r485[6],0,0,1,dis_list,comm_list,0,0);//Ö÷»ú×´Ì¬ÐÅÏ¢Ð´Èë×´Ì¬±í
-	 set_statuslist(count,tx_r485[2],tx_r485[4],tx_r485[7],0,0,2,dis_list,comm_list,0,0);//Ö÷»ú×´Ì¬ÐÅÏ¢Ð´Èë×´Ì¬±í
-      	  set_statuslist(count,tx_r485[2],tx_r485[5],tx_r485[8],0,0,3,dis_list,comm_list,0,0);//Ö÷»ú×´Ì¬ÐÅÏ¢Ð´Èë×´Ì¬±í
 
-   } 
  	
 
 
 /*********************************/
-u8 computer_gonglu(status_dis_node *dis_list,status_comm_node *comm_list,u8 *slave_dis,u8 *slave_comm)
+ computer_gonglu(float32_t testInput_V[],float32_t testInput_C[],float32_t testOutput[],float32_t reslut[])
 {
 int i=0;
 arm_status status; 
 arm_rfft_instance_f32 S;
 arm_cfft_radix4_instance_f32  S_CFFT;
 float32_t maxValue=0.0,maxValue_C=0.0; 
- float32_t testInput_V[TEST_LENGTH_SAMPLES]; 
- float32_t testInput_C[TEST_LENGTH_SAMPLES]; 
 
-float32_t testOutput[TEST_LENGTH_SAMPLES*2/2]; 
-float32_t reslut[TEST_LENGTH_SAMPLES/2]; 
 u16 TR[]={1,2,3,4,5,6,8,10,12,16,20,24,30,40,50,60,80,100,120};
 /* ------------------------------------------------------------------ 
 * Global variables for FFT Bin Example 
@@ -2049,8 +1085,8 @@ allphase(testInput_V,testInput_C);
 	/* Calculates maxValue and returns corresponding BIN value */ 
 
 	arm_max_f32(reslut, fftSize/2, &maxValue, &testIndex);
-dianya_zhi=maxValue/100;
-dianya_zhi=dianya_zhi/2.57;
+dianya_zhi=maxValue/1000;
+dianya_zhi=dianya_zhi/4;
 if(dianya_zhi<=100)dianya_zhi=0;
 /*************************µçÑ¹Ð³²¨ÂÊ****************************************/
 
@@ -2130,7 +1166,6 @@ arm_sqrt_f32(HI_SUM_B,&HI_B);
 HI=(HI_B/maxValue_C)*1.03*100;
 }
 /******************************************************************/
-   order_trans_rs485(mybox.myid,0,0,0,0,CPT_LL);
 
 gonglvshishu_A=gonglvshishu;
 gonglvshishu_B=gonglvshishu;
@@ -2703,7 +1738,6 @@ allkvar=allkvar_A+allkvar_B+allkvar_C;//³ËÒÔ3£¬ÊÇÒòÎªµçÁ÷±äÁ¿ÊÇÒ»ÏàµÄµçÁ÷£¬Ó¦¸Ã±
 //HI=HIA+HIB+HIC;
   wugongkvar_95=wugongkvar_95A+wugongkvar_95B+wugongkvar_95C;
 
-   order_trans_rs485(mybox.myid,0,0,0,0,CPT_LL);
 
 
 }
@@ -2727,16 +1761,14 @@ if(gonglvshishu<COS_ON_para&&L_C_flag_B==1)
 	  	
       	{
 for(i=1;i<=32;i++)
-if(comm_list[i].work_status==0&&(wugongkvar>=comm_list[i].size))
+if(comm_list[i].work_status==0&&(wugongkvar>=comm_list[i].size)&&comm_list[i].size>0)
 {
 display_nothing_close_open_warn=1;//ÉèÖÃÏÔÊ¾Í¶Èë
 {
-set_74hc273(comm_list[i].myid, ON);
- Light_pad_on(dis_com,comm_list[i].myid,1,1,0);
+set_74hc273(i, ON);
+ Light_pad_on(dis_com,i,1,1,0);
 comm_list[i].work_status=1;
-		rs485buf[1]++;
 }
-if(rs485buf[1]==32)rs485buf[1]=1;
 return 0 ;
 }
 
@@ -2751,7 +1783,7 @@ return 0 ;
  }
 }
 
-if((gonglvshishu>COS_OFF_para&&L_C_flag_B==1)||(L_C_flag_B==0))
+if(((gonglvshishu>COS_OFF_para&&L_C_flag_B==1)||(L_C_flag_B==0))&&comm_list[i].size>0)
    
 {
       {
@@ -2763,14 +1795,12 @@ if(comm_list[i].work_status==1)
 {
 display_nothing_close_open_warn=2;//ÉèÖÃÏÔÊ¾ÇÐ³ý
 {
-set_74hc273(comm_list[i].myid, OFF);
- Light_pad_on(dis_com,comm_list[i].myid,0,0,0);
+set_74hc273(i, OFF);
+ Light_pad_on(dis_com,i,0,0,0);
 comm_list[i].work_status=0;
 
-		rs485buf[2]++;
 }
 		{
-if(rs485buf[2]==32)rs485buf[2]=1;
 
 return 0 ;
 
@@ -2849,17 +1879,15 @@ if(1)
 
 {
 for(i=1;i<=32;i++)
-if(comm_list[i].work_status==1)
+if(comm_list[i].work_status==1&&comm_list[i].size>0)
 
 {
 display_nothing_close_open_warn=2;//ÉèÖÃÏÔÊ¾ÇÐ³ý
 {
-set_74hc273(comm_list[i].myid, OFF);
+set_74hc273(i, OFF);
 comm_list[i].work_status=0;
-		rs485buf[2]++;
 }
 		{
-if(rs485buf[2]==32)rs485buf[2]=1;
 
 return 0 ;
 
@@ -2881,728 +1909,7 @@ return 0;
 }
 
 
-void scanf_slave_machine(status_dis_node *dis_list,status_comm_node *comm_list,u8 *slave_dis,u8 *slave_comm)
-{
-u8 i,j=0,g,flag_comm=0,flag_dis=0,s;
-u8 g_1,g_2,g_3,f_1,f_2,f_3;
-//u8 c;
-u8 *msg;
-  u8 err;
-  static u8 dis_err[8];
-    static u8 comm_err[32];
-u8 count=0;
 
-for(i=1;i<=8;i++)
-{  
-
-for(g=1;g<=slave_dis[0];g++)
-{
-if(i==dis_list[g].myid[0]||i==dis_list[g].myid[1]||i==dis_list[g].myid[2]){flag_dis=1;break;}
-else flag_dis=0;
-}
-if(flag_dis==0)
-		{
-//	for(c=1;c<=2;c++)
-		{
-	j=inquiry_slave_status_dis(slave_dis[0]+1,i,dis_list,comm_list); 
-	        if(j==1){ slave_dis[0]++;break;}
-		}
-			}
-if(flag_dis==1)
-{
- computer_trans_rs485(mybox.myid,i,2,0,0,CONTROL);
-   msg=(u8 *)OSMboxPend(RS485_STUTAS_MBOX_dis,OS_TICKS_PER_SEC/10,&err);
-     if(err==OS_ERR_TIMEOUT)
-	 	{
-	 	dis_err[i-1]++;
-	 	if(dis_err[i-1]==3)//Èý´ÎÈ·ÈÏ£¬Èç¹ûÈý´Î¶¼Ã»ÓÐÊÕµ½Êý¾Ý¾ÍÈÏÎªÊÇ´Ó»úËÀÁË
-	 	{
-	 	capa1_array[i-1]=0;capa2_array[i-1]=0;//ÆÁÄ»ÏÔÊ¾ÈÝÁ¿Ê¹ÓÃ
-	 	Light_pad_off(0,i,0,0,0);
-		set_bit(i, 0, &light_status, 0,0, 0,2);
-		dis_err[i-1]=0;
-set_clear_existence(0,i,&hand_light_existence);
-
-for(g_1=1;g_1<=slave_dis[0];g_1++)
-{
-if(i==dis_list[g_1].myid[0])
-	{
-	dis_list[g_1].work_status[0]=2;dis_list[g_1].myid[0]=0;
-         break;
-       }
-
-}
-for(g_2=1;g_2<=slave_dis[0];g_2++)
-{
-if(i==dis_list[g_2].myid[1])
-	{
-	dis_list[g_2].work_status[1]=2;dis_list[g_2].myid[1]=0;
-         break;
-       }
-
-}
-
-
-for(g_3=1;g_3<=slave_dis[0];g_3++)
-{
-if(i==dis_list[g_3].myid[2])
-	{
-	dis_list[g_3].work_status[2]=2;dis_list[g_3].myid[2]=0;
-         break;
-       }
-
-}
-for(f_1=g_1;f_1<slave_dis[0];f_1++)
-{
-dis_list[f_1].myid[0]=dis_list[f_1+1].myid[0];
-dis_list[f_1].work_status[0]=dis_list[f_1+1].work_status[0];
-dis_list[f_1].size[0]=dis_list[f_1+1].size[0];
-
-}
-
-for(f_2=g_2;f_2<slave_dis[0];f_2++)
-{
-dis_list[f_2].myid[1]=dis_list[f_2+1].myid[1];
-dis_list[f_2].work_status[1]=dis_list[f_2+1].work_status[1];
-dis_list[f_2].size[1]=dis_list[f_2+1].size[1];
-
-}
-
-for(f_3=g_3;f_3<slave_dis[0];f_3++)
-{
-dis_list[f_3].myid[2]=dis_list[f_3+1].myid[2];
-dis_list[f_3].work_status[2]=dis_list[f_3+1].work_status[2];
-dis_list[f_3].size[2]=dis_list[f_3+1].size[2];
-
-}
-slave_dis[0]--;
-
-}
-	     }
-else if(msg[2]==i)//¼ì²é´«¹ýÀ´µÄ´Ó»úµÄ×´Ì¬ÐÅÏ¢ÊÇ·ñÕæÊÇ¸Ã´Ó»úµÄ¡£Èç¹û²»ÊÇ¾Í²»¸üÐÂ
-{
-if(msg[3]==1)capa1_array[msg[2]-1]=5;
-if(msg[3]==3)capa1_array[msg[2]-1]=10;
-if(msg[3]==6)capa1_array[msg[2]-1]=20;
-       capa2_array[msg[2]-1]=0;
-dis_err[i-1]=0;
-		for(s=1;s<=slave_dis[0];s++)
-			{
-                   if(i==dis_list[s].myid[0])dis_list[s].work_status[0]=msg[6];
-                   if(i==dis_list[s].myid[1])dis_list[s].work_status[1]=msg[7];
-                   if(i==dis_list[s].myid[2])dis_list[s].work_status[2]=msg[8];
-			}
-Light_pad_on(0,i,msg[6],msg[7],msg[8]);
-set_clear_existence(1,i,&hand_light_existence);
-set_bit(i, 0,&light_status,msg[6],msg[7], msg[8],0);
-}
-
-}
-
-	flag_dis=0;
-       j=0;
-    }
-
-//delay_ms(1000);
-
-j=0;
-{
-for(i=slave_dis[0]+1;i<=32;i++)
-	{  
-
-for(g=0;g<=slave_comm[9]-1;g++)
-{
-if(i==comm_list[g].myid){flag_comm=1;break;}
-
-else flag_comm=0;
-}
-if(flag_comm==0)
-		{		
- inquiry_slave_status_comm(i,slave_comm,comm_list);   
-			
-			}
-//ÒÔÏÂÊÇÎªÁË¸üÐÂ´Ó»úµÄÍ¶ÇÐ×´Ì¬
-if(flag_comm==1)
-
-{
-{order_trans_rs485(mybox.myid,i,3,0,0,CONTROL); 
-  msg=(u8 *)OSMboxPend(RS485_STUTAS_MBOX,OS_TICKS_PER_SEC/10,&err);
-     if(err==OS_ERR_TIMEOUT)
-	 	{
-	  	comm_err[i-1]++; 
-if(comm_err[i-1]==3)
-	  {
-	  Light_pad_off(1,i,0,0,0);//Ö¸Ê¾µÆÊ¹ÓÃ
-	  	 set_bit(i, 1, &light_status, 0,0, 0,2);//ÊÖ¶¯Í¶ÇÐÊ¹ÓÃ
-	  	comm_err[i-1]=0; 
-		set_clear_existence(0,i,&hand_light_existence);
-			 	capa1_array[i-1]=0;capa2_array[i-1]=0;//ÆÁÄ»ÏÔÊ¾ÈÝÁ¿Ê¹ÓÃ
-
-/*******************´ÓÒÑÖª¶ÓÁÐÖÐÉ¾³ý¸Ã½Úµã***********************************/
-
-
- del_comm_listnode(i,1,slave_comm,comm_list);
- del_comm_listnode(i,2,slave_comm,comm_list);
-slave_comm[0]=slave_comm[0]-2;
- /******************´ÓÒÑÖª¶ÓÁÐÖÐÉ¾³ý¸Ã½Úµãend***********************************/
-
-}
-
-
-	 }
-else  if(msg[2]==i)
-	{
-		  	comm_err[i-1]=0; 
-	capa1_array[msg[2]-1]=msg[3];
-       capa2_array[msg[2]-1]=msg[4];
-	 Light_pad_on(1,i,msg[5],msg[6],0);
-	 set_bit(i, 1, &light_status, msg[5],msg[6], 0,0);//ÊÖ¶¯Í¶ÇÐÊ¹ÓÃ
-	 set_clear_existence(1,i,&hand_light_existence);
-
-	if(flag_comm==1)
-		{
-		 flash_comm_list(i,msg[3] ,msg[5] ,1,slave_comm,comm_list);
-		 flash_comm_list(i,msg[4] ,msg[6] ,2,slave_comm,comm_list);
-		}
-       }
-
-}
-	
-
-
-}
-	flag_comm=0;
-       j=0;
-    }
-
-}
-
-}
-
-/**************************************************************/
-
-/******************************************************************/
-
-
-
-
-	
-
-
-void init_Queue_dis(status_dis_node *dis_list,u8 *slave_dis)
-
-{
-
-u8 i,j;
-
-u8 t=0;
-u8 g=0;
-u8 s=0;
-{
-for(i=2;i<=slave_dis[0];i++)
-{
-  
-          t=dis_list[i].size[0];
-	   g=dis_list[i].myid[0];
-	   s=	dis_list[i].work_status[0];
-	   for(j=i-1;j>=1;j--)
-	   	{
-	   	if(t<dis_list[j].size[0])
-	   		{
-	   	dis_list[j+1].myid[0]=dis_list[j].myid[0];
-               dis_list[j+1].size[0]=dis_list[j].size[0];
-		 	dis_list[j+1].work_status[0]=dis_list[j].work_status[0];
-
-	   		}
-		else break;
-		}
-	   dis_list[j+1].myid[0]=g;
-	   dis_list[j+1].size[0]=t;
-            dis_list[j+1].work_status[0]=s;
-}
-for(i=1;i<=slave_dis[0];i++)
-if(dis_list[i].size[0]==1)
-{
-slave_dis[1]=i;
-break;
-}
-if(i>slave_dis[0]){slave_dis[1]=0;slave_dis[7]=0;}
-
-if(slave_dis[1]!=0)
-{
-for(i=slave_dis[1];i<=slave_dis[0];i++)
-if(dis_list[i].size[0]!=1)
-{
-slave_dis[7]=i;
-break;
-}
-if(i>slave_dis[0]){slave_dis[7]=slave_dis[0]+1;}
-
-}
-
-
-for(i=1;i<=slave_dis[0];i++)
-if(dis_list[i].size[0]==3)
-{
-slave_dis[2]=i;
-break;
-}
-if(i>slave_dis[0]){slave_dis[2]=0;slave_dis[8]=0;}
-
-if(slave_dis[2]!=0)
-{
-for(i=slave_dis[2];i<=slave_dis[0];i++)
-if(dis_list[i].size[0]!=3)
-{
-slave_dis[8]=i;
-break;
-}
-if(i>slave_dis[0]){slave_dis[8]=slave_dis[0]+1;}
-
-}
-
-
-
-for(i=1;i<=slave_dis[0];i++)
-if(dis_list[i].size[0]==6)
-{
-slave_dis[3]=i;
-break;
-}
-if(i>slave_dis[0]){slave_dis[3]=0;slave_dis[9]=0;}
-if(slave_dis[3]!=0)
-{
-for(i=slave_dis[3];i<=slave_dis[0];i++)
-if(dis_list[i].size[0]!=6)
-{
-slave_dis[9]=i;
-break;
-}
-if(i>slave_dis[0]){slave_dis[9]=slave_dis[0]+1;}
-
-}
-
-
-
-
-}
-
-
-/***************************************************/
-{
-for(i=2;i<=slave_dis[0];i++)
-{
-  
-          t=dis_list[i].size[1];
-	   g=dis_list[i].myid[1];//ÉèÖÃmyidÁ½¸ö
-	   s=	dis_list[i].work_status[1];
-
-	   for(j=i-1;j>=1;j--)
-	   	{
-	   	if(t<dis_list[j].size[1])
-	   		{
-		dis_list[j+1].myid[1]=dis_list[j].myid[1];
-               dis_list[j+1].size[1]=dis_list[j].size[1];
-		 dis_list[j+1].work_status[1]=dis_list[j].work_status[1];
-
-	   		}
-		else break;
-	       }
-	   dis_list[j+1].myid[1]=g;
-	   dis_list[j+1].size[1]=t;
-            dis_list[j+1].work_status[1]=s;
-
-
-}
-
-
-for(i=1;i<=slave_dis[0];i++)
-if(dis_list[i].size[1]==1)
-{
-slave_dis[4]=i;
-break;
-}
-if(i>slave_dis[0]){slave_dis[4]=0;slave_dis[10]=0;}
-
-if(slave_dis[4]!=0)
-{
-for(i=slave_dis[4];i<=slave_dis[0];i++)
-if(dis_list[i].size[1]!=1)
-{
-slave_dis[10]=i;
-break;
-}
-if(i>slave_dis[0]){slave_dis[10]=slave_dis[0]+1;}
-
-}
-
-
-
-for(i=1;i<=slave_dis[0];i++)
-if(dis_list[i].size[1]==3)
-{
-slave_dis[5]=i;
-break;
-}
-if(i>slave_dis[0]){slave_dis[5]=0;slave_dis[11]=0;}
-
-if(slave_dis[5]!=0)
-{
-for(i=slave_dis[5];i<=slave_dis[0];i++)
-if(dis_list[i].size[1]!=3)
-{
-slave_dis[11]=i;
-break;
-}
-if(i>slave_dis[0]){slave_dis[11]=slave_dis[0]+1;}
-
-}
-
-
-
-
-for(i=1;i<=slave_dis[0];i++)
-if(dis_list[i].size[1]==6)
-{
-slave_dis[6]=i;
-break;
-}
-//slave_comm[12]=slave_comm[0]+1;
-if(i>slave_dis[0]){slave_dis[6]=0;slave_dis[12]=0;}
-if(slave_dis[6]!=0)
-{
-for(i=slave_dis[6];i<=slave_dis[0];i++)
-if(dis_list[i].size[1]!=6)
-{
-slave_dis[12]=i;
-break;
-}
-if(i>slave_dis[0]){slave_dis[12]=slave_dis[0]+1;}
-
-}
-}
-/***********************************/
-{
-for(i=2;i<=slave_dis[0];i++)
-{
-  
-          t=dis_list[i].size[2];
-	   g=dis_list[i].myid[2];//ÉèÖÃmyidÁ½¸ö
-	   s=	dis_list[i].work_status[2];
-
-	   for(j=i-1;j>=1;j--)
-	   	{
-	   	if(t<dis_list[j].size[2])
-	   		{
-		dis_list[j+1].myid[2]=dis_list[j].myid[2];
-               dis_list[j+1].size[2]=dis_list[j].size[2];
-		 dis_list[j+1].work_status[2]=dis_list[j].work_status[2];
-
-	   		}
-		else break;
-	       }
-	   dis_list[j+1].myid[2]=g;
-	   dis_list[j+1].size[2]=t;
-            dis_list[j+1].work_status[2]=s;
-
-
-}
-
-
-for(i=1;i<=slave_dis[0];i++)
-if(dis_list[i].size[2]==1)
-{
-slave_dis[13]=i;
-break;
-}
-if(i>slave_dis[0]){slave_dis[13]=0;slave_dis[14]=0;}
-
-if(slave_dis[13]!=0)
-{
-for(i=slave_dis[13];i<=slave_dis[0];i++)
-if(dis_list[i].size[2]!=1)
-{
-slave_dis[14]=i;
-break;
-}
-if(i>slave_dis[0]){slave_dis[14]=slave_dis[0]+1;}
-
-}
-
-
-
-for(i=1;i<=slave_dis[0];i++)
-if(dis_list[i].size[2]==3)
-{
-slave_dis[15]=i;
-break;
-}
-if(i>slave_dis[0]){slave_dis[15]=0;slave_dis[16]=0;}
-
-if(slave_dis[15]!=0)
-{
-for(i=slave_dis[15];i<=slave_dis[0];i++)
-if(dis_list[i].size[2]!=3)
-{
-slave_dis[16]=i;
-break;
-}
-if(i>slave_dis[0]){slave_dis[16]=slave_dis[0]+1;}
-
-}
-
-
-
-
-for(i=1;i<=slave_dis[0];i++)
-if(dis_list[i].size[2]==6)
-{
-slave_dis[17]=i;
-break;
-}
-//slave_comm[12]=slave_comm[0]+1;
-if(i>slave_dis[0]){slave_dis[17]=0;slave_dis[18]=0;}
-if(slave_dis[17]!=0)
-{
-for(i=slave_dis[17];i<=slave_dis[0];i++)
-if(dis_list[i].size[2]!=6)
-{
-slave_dis[18]=i;
-break;
-}
-if(i>slave_dis[0]){slave_dis[18]=slave_dis[0]+1;}
-
-}
-}
-
-
-
-
-/********************************/
-}
-
-
-
-
-/*********************************************************************/
-void change_Queue_dis(u8 abc,u8 Level, status_dis_node *dis_list,u8 *slave_dis)
-{
-u8 i;
-u8 t=0, g=0,s=0;
-
-{
-if(Level==1)
-	
-{
-if(abc==0)
-{
-if(slave_dis[1]!=0)
-
-{
-          t=dis_list[slave_dis[1]].size[abc];
-	   g=dis_list[slave_dis[1]].myid[abc];
-	   s=	dis_list[slave_dis[1]].work_status[abc];
-for(i=slave_dis[1];i<slave_dis[7]-1;i++)
-  {
-          dis_list[i].size[abc]=dis_list[i+1].size[abc];
-	   dis_list[i].myid[abc]=dis_list[i+1].myid[abc];
-	   dis_list[i].work_status[abc]=dis_list[i+1].work_status[abc];
-
-  }
-        dis_list[slave_dis[7]-1].size[abc]=t;
-	  dis_list[slave_dis[7]-1].myid[abc]=g;
-	  dis_list[slave_dis[7]-1].work_status[abc]=s;
-}
-}
-/***********************************************************************************/
-if(abc==1)
-
-{
-if(slave_dis[4]!=0)
-
-{
-          t=dis_list[slave_dis[4]].size[abc];
-	   g=dis_list[slave_dis[4]].myid[abc];
-	   s=	dis_list[slave_dis[4]].work_status[abc];
-for(i=slave_dis[4];i<slave_dis[10]-1;i++)
-  {
-          dis_list[i].size[abc]=dis_list[i+1].size[abc];
-	   dis_list[i].myid[abc]=dis_list[i+1].myid[abc];
-	   dis_list[i].work_status[abc]=dis_list[i+1].work_status[abc];
-
-  }
-        dis_list[slave_dis[10]-1].size[abc]=t;
-	  dis_list[slave_dis[10]-1].myid[abc]=g;
-	  dis_list[slave_dis[10]-1].work_status[abc]=s;
-}
-}
-
-/***********************************************************************************/
-if(abc==2)
-{
-if(slave_dis[13]!=0)
-
-{
-          t=dis_list[slave_dis[13]].size[abc];
-	   g=dis_list[slave_dis[13]].myid[abc];
-	   s=	dis_list[slave_dis[13]].work_status[abc];
-for(i=slave_dis[13];i<slave_dis[14]-1;i++)
-  {
-          dis_list[i].size[abc]=dis_list[i+1].size[abc];
-	   dis_list[i].myid[abc]=dis_list[i+1].myid[abc];
-	   dis_list[i].work_status[abc]=dis_list[i+1].work_status[abc];
-
-  }
-        dis_list[slave_dis[14]-1].size[abc]=t;
-	  dis_list[slave_dis[14]-1].myid[abc]=g;
-	  dis_list[slave_dis[14]-1].work_status[abc]=s;
-}
-}
-}
-/***********************************************************************************/
-/***********************************************************************************/
-if(Level==3)
-
-{
-if(abc==0)
-{
-if(slave_dis[2]!=0)
-
-{
-          t=dis_list[slave_dis[2]].size[abc];
-	   g=dis_list[slave_dis[2]].myid[abc];
-	   s=	dis_list[slave_dis[2]].work_status[abc];
-for(i=slave_dis[2];i<slave_dis[8]-1;i++)
-  {
-          dis_list[i].size[abc]=dis_list[i+1].size[abc];
-	   dis_list[i].myid[abc]=dis_list[i+1].myid[abc];
-	   dis_list[i].work_status[abc]=dis_list[i+1].work_status[abc];
-
-  }
-        dis_list[slave_dis[8]-1].size[abc]=t;
-	  dis_list[slave_dis[8]-1].myid[abc]=g;
-	  dis_list[slave_dis[8]-1].work_status[abc]=s;
-}
-}
-/***********************************************************************************/
-if(abc==1)
-
-{
-if(slave_dis[5]!=0)
-
-{
-          t=dis_list[slave_dis[5]].size[abc];
-	   g=dis_list[slave_dis[5]].myid[abc];
-	   s=	dis_list[slave_dis[5]].work_status[abc];
-for(i=slave_dis[5];i<slave_dis[11]-1;i++)
-  {
-          dis_list[i].size[abc]=dis_list[i+1].size[abc];
-	   dis_list[i].myid[abc]=dis_list[i+1].myid[abc];
-	   dis_list[i].work_status[abc]=dis_list[i+1].work_status[abc];
-
-  }
-        dis_list[slave_dis[11]-1].size[abc]=t;
-	  dis_list[slave_dis[11]-1].myid[abc]=g;
-	  dis_list[slave_dis[11]-1].work_status[abc]=s;
-}
-}
-
-/***********************************************************************************/
-if(abc==2)
-{
-if(slave_dis[15]!=0)
-
-{
-          t=dis_list[slave_dis[15]].size[abc];
-	   g=dis_list[slave_dis[15]].myid[abc];
-	   s=	dis_list[slave_dis[15]].work_status[abc];
-for(i=slave_dis[15];i<slave_dis[16]-1;i++)
-  {
-          dis_list[i].size[abc]=dis_list[i+1].size[abc];
-	   dis_list[i].myid[abc]=dis_list[i+1].myid[abc];
-	   dis_list[i].work_status[abc]=dis_list[i+1].work_status[abc];
-
-  }
-        dis_list[slave_dis[16]-1].size[abc]=t;
-	  dis_list[slave_dis[16]-1].myid[abc]=g;
-	  dis_list[slave_dis[16]-1].work_status[abc]=s;
-}
-}
-}
-/***********************************************************************************/
-/***********************************************************************************/
-if(Level==6)
-{
-if(abc==0)
-{
-if(slave_dis[3]!=0)
-
-{
-          t=dis_list[slave_dis[3]].size[abc];
-	   g=dis_list[slave_dis[3]].myid[abc];
-	   s=	dis_list[slave_dis[3]].work_status[abc];
-for(i=slave_dis[3];i<slave_dis[9]-1;i++)
-  {
-          dis_list[i].size[abc]=dis_list[i+1].size[abc];
-	   dis_list[i].myid[abc]=dis_list[i+1].myid[abc];
-	   dis_list[i].work_status[abc]=dis_list[i+1].work_status[abc];
-
-  }
-        dis_list[slave_dis[9]-1].size[abc]=t;
-	  dis_list[slave_dis[9]-1].myid[abc]=g;
-	  dis_list[slave_dis[9]-1].work_status[abc]=s;
-}
-}
-/***********************************************************************************/
-if(abc==1)
-
-{
-if(slave_dis[6]!=0)
-
-{
-          t=dis_list[slave_dis[6]].size[abc];
-	   g=dis_list[slave_dis[6]].myid[abc];
-	   s=	dis_list[slave_dis[6]].work_status[abc];
-for(i=slave_dis[6];i<slave_dis[12]-1;i++)
-  {
-          dis_list[i].size[abc]=dis_list[i+1].size[abc];
-	   dis_list[i].myid[abc]=dis_list[i+1].myid[abc];
-	   dis_list[i].work_status[abc]=dis_list[i+1].work_status[abc];
-
-  }
-        dis_list[slave_dis[12]-1].size[abc]=t;
-	  dis_list[slave_dis[12]-1].myid[abc]=g;
-	  dis_list[slave_dis[12]-1].work_status[abc]=s;
-}
-}
-
-/***********************************************************************************/
-if(abc==2)
-{
-if(slave_dis[17]!=0)
-
-{
-          t=dis_list[slave_dis[17]].size[abc];
-	   g=dis_list[slave_dis[17]].myid[abc];
-	   s=	dis_list[slave_dis[17]].work_status[abc];
-for(i=slave_dis[17];i<slave_dis[18]-1;i++)
-  {
-          dis_list[i].size[abc]=dis_list[i+1].size[abc];
-	   dis_list[i].myid[abc]=dis_list[i+1].myid[abc];
-	   dis_list[i].work_status[abc]=dis_list[i+1].work_status[abc];
-
-  }
-        dis_list[slave_dis[18]-1].size[abc]=t;
-	  dis_list[slave_dis[18]-1].myid[abc]=g;
-	  dis_list[slave_dis[18]-1].work_status[abc]=s;
-}
-}
-}
-
-
-}
-
-}
 
 /***********************************************************************
 TIME_4
@@ -3690,7 +1997,6 @@ void EXTI9_5_IRQHandler(void)
 	
 	{
 
- scan_init=20;
 
 	}
       EXTI_ClearITPendingBit(EXTI_Line8);
@@ -3701,8 +2007,6 @@ void EXTI9_5_IRQHandler(void)
 	delay_us(1000);//°´¼üÏû¶¶
 if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_9)==0)
 {	
-order_trans_rs485(mybox.myid,0,1,1,0,CONTROL);
-order_trans_rs485(mybox.myid,0,1,2,0,CONTROL);
 }
 
 	}
@@ -3728,19 +2032,15 @@ void EXTI15_10_IRQHandler(void)
 {
 if(dis_com==1)
 {
-order_trans_rs485(mybox.myid,hand_id,1,1,0,CONTROL);
-order_trans_rs485(mybox.myid,hand_id,1,2,0,CONTROL);
-hand_comm_onoff=0;
 
 /*¿ìËÙ¿ØÖÆÆ÷ÊÖ¶¯ÇÐ ¹²²¹*/
 set_74hc273(hand_id, OFF);
  Light_pad_on(dis_com,hand_id,1,1,0);
+comm_list[hand_id].work_status=0;
+
 }
 
-if(dis_com==0)
-{
-computer_trans_rs485(mybox.myid,hand_id,1,1,23,CONTROL);//ÈýÏàÒ»ÆðÇÐÃüÁî
-}
+
 }
 
 	}
@@ -3753,32 +2053,17 @@ computer_trans_rs485(mybox.myid,hand_id,1,1,23,CONTROL);//ÈýÏàÒ»ÆðÇÐÃüÁî
 {
 if(dis_com==1)
 {
-if(comm_number==0&&hand_comm_onoff==0)
-{
-order_trans_rs485(mybox.myid,hand_id,1,1,1,CONTROL);
-comm_number=1;
-hand_comm_onoff=1;
 
-}
 
-if(comm_number==1&&hand_comm_onoff==0)
-{
-order_trans_rs485(mybox.myid,hand_id,1,2,1,CONTROL);
-comm_number=0;
-hand_comm_onoff=1;
 
-}
 /*¿ìËÙ¿ØÖÆÆ÷ÊÖ¶¯Í¶ ¹²²¹*/
 
 set_74hc273(hand_id, ON);
  Light_pad_on(dis_com,hand_id,1,1,0);
-//comm_list[i].work_status=1;
+comm_list[hand_id].work_status=1;
 
 }
-if(dis_com==0)
-{
-computer_trans_rs485(mybox.myid,hand_id,1,1,32,CONTROL);//ÈýÏàÒ»ÆðÍ¶ÃüÁî
-}	
+	
 }
 
 	}

@@ -1036,6 +1036,11 @@
               <FileType>1</FileType>
               <FilePath>..\lcd\src\myiic.c</FilePath>
             </File>
+            <File>
+              <FileName>ch452.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lcd\src\ch452.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

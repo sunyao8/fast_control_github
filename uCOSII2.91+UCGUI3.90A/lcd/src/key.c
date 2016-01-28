@@ -8,7 +8,6 @@ u8 L1_L2_L3_COS=1;
 u8 L1_L2_L3_KAR=1;
  u8 COMMCAT_para=0;
 u8 CAPA_num=1,capa1_value,capa2_value;
-u8 capa1_array[32],capa2_array[32];
 
 //#endif
 /*************************************/
@@ -32,6 +31,7 @@ extern u8 L_C_flag_C;
 extern u8 light_time;
 
 
+extern   status_comm_node comm_list[34];
 
 //////////////////////////////////////////////////////////////////////////////////	 
 //本程序为控制器设计，未经许可，不得复制外传
@@ -840,12 +840,12 @@ break;
   if(KEY_conceal==0)
 		  	{
                   LIGHT_backligt_on();
-			capa1_array[CAPA_num-1]++;	  
+			comm_list[CAPA_num].size=comm_list[CAPA_num].size+1;	  
 		      }
 		  while(KEY_conceal==0);		  
-if(capa1_array[CAPA_num-1]>100)capa1_array[CAPA_num-1]=1;
-				capa1_value=capa1_array[CAPA_num-1];
-		  AT24CXX_WriteOneByte(0x0010+(CAPA_num-1)*2,capa1_array[CAPA_num-1]);  //存储DELAY_ON_para到eeprom
+if(comm_list[CAPA_num].size>99)comm_list[CAPA_num].size=0;
+				capa1_value=comm_list[CAPA_num].size;
+		  AT24CXX_WriteOneByte(0x0010+(CAPA_num-1)*2,comm_list[CAPA_num].size);  //存储DELAY_ON_para到eeprom
 
 		  WriteAll_1621(20,numCAP,4);
 
@@ -853,8 +853,8 @@ if(capa1_array[CAPA_num-1]>100)capa1_array[CAPA_num-1]=1;
 		  CAPA_num_gewei=CAPA_num%10;
 	   	  capa1_value_shiwei=capa1_value/10;
 		  capa1_value_gewei=capa1_value%10;
-		  capa2_value_shiwei=capa2_value/10;
-		  capa2_value_gewei=capa2_value%10;
+		  capa2_value_shiwei=capa1_value/10;
+		  capa2_value_gewei=capa1_value%10;
 
 		  WriteAll_1621(18,num1_5Seg+2*CAPA_num_shiwei,2);
 		  WriteAll_1621(16,num1_5Seg+2*CAPA_num_gewei,2);
@@ -880,8 +880,8 @@ if(capa1_array[CAPA_num-1]>100)capa1_array[CAPA_num-1]=1;
 			CAPA_num--;
 			while(KEY_left==0);
 		  	if(CAPA_num<1)CAPA_num=32;
-			capa1_value=capa1_array[CAPA_num-1];
-			capa2_value=capa2_array[CAPA_num-1];
+			capa1_value=comm_list[CAPA_num].size;
+			capa2_value=comm_list[CAPA_num].size;
 
 			
 		  }
