@@ -843,7 +843,7 @@ break;
 			comm_list[CAPA_num].size=comm_list[CAPA_num].size+1;	  
 		      }
 		  while(KEY_conceal==0);		  
-if(comm_list[CAPA_num].size>99)comm_list[CAPA_num].size=0;
+if(comm_list[CAPA_num].size>1)comm_list[CAPA_num].size=0;
 				capa1_value=comm_list[CAPA_num].size;
 		  AT24CXX_WriteOneByte(0x0010+(CAPA_num-1)*2,comm_list[CAPA_num].size);  //´æ´¢DELAY_ON_paraµ½eeprom
 

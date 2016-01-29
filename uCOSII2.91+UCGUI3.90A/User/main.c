@@ -63,6 +63,10 @@ typedef struct
 
 
 static  void  App_TaskLCD		() ;
+void sort_list();
+void qeen(  u8 d,u8 n);
+
+
 /*
 *********************************************************************************************************
 *                                                main()
@@ -220,7 +224,8 @@ float32_t reslut[TEST_LENGTH_SAMPLES/2];
 //u8 free_timeout_5=100;//轮休时间控制变量
 
 /**********************************************/
-
+u8 first=1;
+u8 end=32;
 INT32S main (void)
 {
 CPU_INT08U  os_err;
@@ -231,6 +236,8 @@ u8 i;
 
    // OS_CPU_SysTickInit();/* Initialize the SysTick.                              */
 	delay_init();
+delay_ms(10000);
+
 //	delay_us(500000);
 NVIC_Configuration();
 GPIO_Configuration();
@@ -240,7 +247,7 @@ GPIO_Configuration();
  init_light_off();
  LIGHT_backligt_on();
 init_cap();
-
+//sort_list();
 while(1)
 {
  App_TaskLCD();
@@ -275,8 +282,10 @@ else
 
 if(COMMCAT_para==0) //自动模式
 {
+//sort_list();
 
  computer_gonglu(testInput_V,testInput_C,testOutput,reslut);
+//delay_ms(1000);
 
 }
 
@@ -563,6 +572,7 @@ for(i=1;i<=32;i++)
 {
 comm_list[i].size= AT24CXX_ReadOneByte(0x0010+(i-1)*2);
 comm_list[i].work_status=0;
+comm_list[i].id=i;
  Light_pad_on(dis_com,i,0,0,0);
 }
 }
@@ -959,9 +969,52 @@ return value;
 
 
 /**************/
+void sort_list()
+{
+u8 i,j;
+u8 g,s,q;
+for(j=2;j<=32;j++)
+{
+g=comm_list[j].size;
+s=comm_list[j].work_status;
+q=comm_list[j].id;
+for(i=j-1;i>0;i--)
+{
+if(comm_list[i].size<g)
+{
+comm_list[i+1].size=comm_list[i].size;
+comm_list[i+1].work_status=comm_list[i].work_status;
+comm_list[i+1].id=comm_list[i].id;
+}
+}
+comm_list[i+1].size=g;
+comm_list[i+1].work_status=s;
+comm_list[i+1].id=q;
 
+
+
+}
+
+}
  	
+void qeen(u8 d,u8 n)
+{
+u8 j;
+u8 g,s,q;
+g=comm_list[d].size;
+s=comm_list[d].work_status;
+q=comm_list[d].id;
 
+for(j=d;j<n;j++)
+{
+comm_list[j].size=comm_list[j+1].size;
+comm_list[j].work_status=comm_list[j+1].work_status;
+comm_list[j].id=comm_list[j+1].id;
+}
+comm_list[n].size=g;
+comm_list[n].work_status=s;
+comm_list[n].id=q;
+}
 
 /*********************************/
  computer_gonglu(float32_t testInput_V[],float32_t testInput_C[],float32_t testOutput[],float32_t reslut[])
@@ -1086,7 +1139,7 @@ allphase(testInput_V,testInput_C);
 
 	arm_max_f32(reslut, fftSize/2, &maxValue, &testIndex);
 dianya_zhi=maxValue/1000;
-dianya_zhi=dianya_zhi/4;
+dianya_zhi=dianya_zhi/4.15;
 if(dianya_zhi<=100)dianya_zhi=0;
 /*************************电压谐波率****************************************/
 
@@ -1143,7 +1196,7 @@ if(((angle[2]>180.0)&&(angle[2]<270))||((angle[2]>-180.0&&angle[2]<-90.0))){L_C_
 else if(((angle[2]<180.0)&&(angle[2]>90.0))||(angle[2]>-270&&angle[2]<-180)){L_C_flag_B=0;}
 }
 
-dianliuzhi=T*maxValue_C*cruccent_ratio;
+dianliuzhi=T*maxValue_C*cruccent_ratio/16.2;
 arm_sqrt_f32(1-(arm_cos_f32(angle[0]-angle[1]))*(arm_cos_f32(angle[0]-angle[1])),&sine);
 gonglvshishu=sine*100;
 if(dianliuzhi<zero_limit*T){gonglvshishu=100;dianliuzhi=0;L_C_flag_B=1;}//电流小于0.1A 时，电流就清零
@@ -1760,18 +1813,21 @@ if(gonglvshishu<COS_ON_para&&L_C_flag_B==1)
       {
 	  	
       	{
-for(i=1;i<=32;i++)
+for(i=first;i<=32;i++)
 if(comm_list[i].work_status==0&&(wugongkvar>=comm_list[i].size)&&comm_list[i].size>0)
 {
 display_nothing_close_open_warn=1;//设置显示投入
 {
-set_74hc273(i, ON);
- Light_pad_on(dis_com,i,1,1,0);
+set_74hc273(comm_list[i].id, ON);
+ Light_pad_on(dis_com,comm_list[i].id,1,1,0);
 comm_list[i].work_status=1;
+//qeen( comm_list,i,32);
+first=i+1;
+
 }
 return 0 ;
 }
-
+first=1;
 
       	}
 
@@ -1783,22 +1839,23 @@ return 0 ;
  }
 }
 
-if(((gonglvshishu>COS_OFF_para&&L_C_flag_B==1)||(L_C_flag_B==0))&&comm_list[i].size>0)
+if(((gonglvshishu>COS_OFF_para&&L_C_flag_B==1)||(L_C_flag_B==0)))
    
 {
       {
 
 {
-for(i=1;i<=32;i++)
-if(comm_list[i].work_status==1)
+for(i=end;i<=32;i++)
+if(comm_list[i].work_status==1&&comm_list[i].size>0)
 
 {
 display_nothing_close_open_warn=2;//设置显示切除
 {
-set_74hc273(i, OFF);
- Light_pad_on(dis_com,i,0,0,0);
+set_74hc273(comm_list[i].id, OFF);
+ Light_pad_on(dis_com,comm_list[i].id,0,0,0);
 comm_list[i].work_status=0;
-
+end=i+1;
+//qeen(i,32);
 }
 		{
 
@@ -1806,7 +1863,7 @@ return 0 ;
 
 		}
 }
-
+end=1;
 
 }
 	  
@@ -1878,14 +1935,15 @@ if(1)
 {
 
 {
-for(i=1;i<=32;i++)
+for(i=end;i<=32;i++)
 if(comm_list[i].work_status==1&&comm_list[i].size>0)
 
 {
 display_nothing_close_open_warn=2;//设置显示切除
 {
-set_74hc273(i, OFF);
+set_74hc273(comm_list[i].id, OFF);
 comm_list[i].work_status=0;
+end=i+1;
 }
 		{
 
@@ -1894,7 +1952,7 @@ return 0 ;
 		}
 }
 
-
+end=1;
 }
 	  
        }		

@@ -15,6 +15,7 @@ typedef struct
 { 
   u8 size;      //容量单位千法
   u8 work_status;    //工作状态 1 为投入工作；0 为没有工作
+  u8 id;
 }status_comm_node;
 
 
