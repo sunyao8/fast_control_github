@@ -200,7 +200,7 @@ u8 L_C_flag_C=1;//∏––‘»›–‘±Í◊º±‰¡ø
  
 u8 phase_flag=0;
 u8 light_time=100;
-
+u8 light_time_led=50;
 u8 delay_on=0,delay_off=0;
 u8 delay_on_cont=1,delay_off_cont=1;
 /********************øÿ÷∆∆˜…Ë÷√≤Œ ˝*************************/
@@ -229,19 +229,21 @@ u8 end=32;
 INT32S main (void)
 {
 CPU_INT08U  os_err;
-u8 i;	
+u8 i;
+u32 j;
 //CPU_IntDis();                   
 /***************  Init hardware ***************/
 //u8 i;
 
    // OS_CPU_SysTickInit();/* Initialize the SysTick.                              */
-	delay_init();
-delay_ms(10000);
+for(j=0;j<=100000000;j++);
+delay_init();
+//delay_ms(10000);
 
 //	delay_us(500000);
 NVIC_Configuration();
 GPIO_Configuration();
-
+IWDG_Init(6,625); 
  //EXTI_Configuration();//≥ı ºªØ∫Ø ˝
 
  init_light_off();
@@ -253,6 +255,9 @@ while(1)
  App_TaskLCD();
   {
 
+  if(KEY_3==0) 
+
+{
 for(i=1;i<=32;i++)
 {
 
@@ -275,8 +280,57 @@ else
 
 }
 
+ 	}
+
+  if(KEY_3==1) 
+  	{
+
+for(i=1;i<=26;i++)
+{
+
+/*∏¸–¬÷∏ æµ∆*/
+if(comm_list[i].size==0)
+{
+Light_pad_off(1,i,0,0,0);//÷∏ æµ∆ π”√
+	  	 set_bit(i, 1, &light_status, 0,0, 0,2);// ÷∂ØÕ∂«– π”√
+		set_clear_existence(0,i,&hand_light_existence);
 
 
+}
+else
+{
+	 Light_pad_on(1,i,comm_list[i].work_status,comm_list[i].work_status,0);
+	 set_bit(i, 1, &light_status, comm_list[i].work_status,comm_list[i].work_status,0,0);// ÷∂ØÕ∂«– π”√
+	 set_clear_existence(1,i,&hand_light_existence);
+
+}
+
+}
+
+for(i=27;i<=32;i++)
+{
+
+/*∏¸–¬÷∏ æµ∆*/
+if(comm_list[i].size==0)
+{
+Light_pad_off(1,i,0,0,0);//÷∏ æµ∆ π”√
+	  	 set_bit(i, 1, &light_status, 0,0, 0,2);// ÷∂ØÕ∂«– π”√
+		set_clear_existence(0,i,&hand_light_existence);
+
+
+}
+else
+{
+	 Light_pad_on(1,i,comm_list[i].work_status,comm_list[i].work_status,0);
+	 set_bit(i, 1, &light_status, comm_list[i].work_status,comm_list[i].work_status,0,0);// ÷∂ØÕ∂«– π”√
+	 set_clear_existence(1,i,&hand_light_existence);
+
+}
+
+}
+
+
+  }
 
 
 
@@ -457,23 +511,24 @@ u8 i;
 
 	  }
 
-	   if(exist==1)	{
+	   //if(exist==1)
+	   	{
            status_4=clear_bit(hand_id,light_status.work_status[3]);
 	//	   dis_com= clear_bit(hand_id,light_status.dis_comm);
-		if(status_4==0)   
+	//	if(status_4==0)   
 			{
 	status_1= clear_bit(hand_id,light_status.work_status[0]);
 	status_2= clear_bit(hand_id,light_status.work_status[1]);
 	status_3= clear_bit(hand_id,light_status.work_status[2]);
-if(Work_Flag==1)Light_pad_on(dis_com,hand_id,status_1,status_2,status_3);
-if(Work_Flag==0)Light_pad_off(dis_com,hand_id,status_1,status_2,status_3);
-				}
-			if(status_4==1)   
-				{
-if(Work_Flag==1)Light_pad_on(dis_com,hand_id,2,2,2);
-if(Work_Flag==0)Light_pad_off(dis_com,hand_id,2,2,2);
+//if(Work_Flag==1)
+	Light_pad_on(dis_com,hand_id,status_1,status_2,status_3);
+delay_ms(50);
+//if(Work_Flag==0)
+	Light_pad_off(dis_com,hand_id,status_1,status_2,status_3);
+delay_ms(50);
 
-			}
+				}
+				
 	   	}
 		  
 		  
@@ -1054,7 +1109,7 @@ u8 flag_phase=1;
  u8 HU_PROT_para=100;
  u8 HI_PROT_para=100;
  u8 ON_HOLD_para;
- 
+ u8 dis_num=0;
 u8 T;
 static u8 warning_flag=0;
 
@@ -1139,7 +1194,7 @@ allphase(testInput_V,testInput_C);
 
 	arm_max_f32(reslut, fftSize/2, &maxValue, &testIndex);
 dianya_zhi=maxValue/1000;
-dianya_zhi=dianya_zhi/4.15;
+dianya_zhi=dianya_zhi/4.35;
 if(dianya_zhi<=100)dianya_zhi=0;
 /*************************µÁ—π–≥≤®¬ ****************************************/
 
@@ -1196,7 +1251,7 @@ if(((angle[2]>180.0)&&(angle[2]<270))||((angle[2]>-180.0&&angle[2]<-90.0))){L_C_
 else if(((angle[2]<180.0)&&(angle[2]>90.0))||(angle[2]>-270&&angle[2]<-180)){L_C_flag_B=0;}
 }
 
-dianliuzhi=T*maxValue_C*cruccent_ratio/16.2;
+dianliuzhi=T*maxValue_C*cruccent_ratio/16.8;
 arm_sqrt_f32(1-(arm_cos_f32(angle[0]-angle[1]))*(arm_cos_f32(angle[0]-angle[1])),&sine);
 gonglvshishu=sine*100;
 if(dianliuzhi<zero_limit*T){gonglvshishu=100;dianliuzhi=0;L_C_flag_B=1;}//µÁ¡˜–°”⁄0.1A  ±£¨µÁ¡˜æÕ«Â¡„
@@ -1352,8 +1407,8 @@ allphase(testInput_V,testInput_C);
 	/* Calculates maxValue and returns corresponding BIN value */ 
 
 	arm_max_f32(reslut, fftSize/2, &maxValue, &testIndex);
-dianya_zhi_A=maxValue/100;
-dianya_zhi_A=dianya_zhi_A/2.57;
+dianya_zhi_A=maxValue/1000;
+dianya_zhi_A=dianya_zhi_A/4.35;
 if(dianya_zhi_A<=100)dianya_zhi_A=0;
 
 /*************************µÁ—π–≥≤®¬ ****************************************/
@@ -1431,7 +1486,7 @@ angle[2]=((angle[2])*PI2)/360;
 
 
 /***************************************************************/
- dianliuzhi_A=cruccent_ratio*maxValue_C*T;
+ dianliuzhi_A=T*maxValue_C*cruccent_ratio/16.8;
  if(dianliuzhi_A<=zero_limit*T){dianliuzhi_A=0;gonglvshishu_A=100;L_C_flag_A=1;}
 else{ 
 	dianliuzhi_A=dianliuzhi_A/1000;
@@ -1501,8 +1556,8 @@ allphase(testInput_V,testInput_C);
 	/* Calculates maxValue and returns corresponding BIN value */ 
 
 	arm_max_f32(reslut, fftSize/2, &maxValue, &testIndex);
-dianya_zhi_B=maxValue/100;
-dianya_zhi_B=dianya_zhi_B/2.57;
+dianya_zhi_B=maxValue/1000;
+dianya_zhi_B=dianya_zhi_B/4.35;
 if(dianya_zhi_B<=100)dianya_zhi_B=0;
 
 /*************************µÁ—π–≥≤®¬ ****************************************/
@@ -1578,7 +1633,7 @@ angle[2]=((angle[2])*PI2)/360;
 
 
 /***************************************************************/
-dianliuzhi_B=cruccent_ratio*maxValue_C*T;
+dianliuzhi_B=T*maxValue_C*cruccent_ratio/16.8;
  if(dianliuzhi_B<=zero_limit*T){dianliuzhi_B=0;gonglvshishu_B=100;L_C_flag_B=1;}
 else {
         dianliuzhi_B=dianliuzhi_B/1000;
@@ -1586,6 +1641,7 @@ else {
 }
 /*************************µÁ¡˜–≥≤®¬ ****************************************/
 if((dianliuzhi_B==0)&&(gonglvshishu_B==100))B_HI=0;
+else
 {
 for(i=3;i<=21;i=i+2){HI_SUM_B=(reslut[i]*reslut[i])+HI_SUM_B;}
 arm_sqrt_f32(HI_SUM_B,&HI_B);
@@ -1657,8 +1713,8 @@ allphase(testInput_V,testInput_C);
 	/* Calculates maxValue and returns corresponding BIN value */ 
 
 	arm_max_f32(reslut, fftSize/2, &maxValue, &testIndex);
-dianya_zhi_C=maxValue/100;
-dianya_zhi_C=dianya_zhi_C/2.57;
+dianya_zhi_C=maxValue/1000;
+dianya_zhi_C=dianya_zhi_C/4.35;
 if(dianya_zhi_C<=100)dianya_zhi_C=0;
 
 /*************************µÁ—π–≥≤®¬ ****************************************/
@@ -1735,7 +1791,7 @@ angle[2]=((angle[2])*PI2)/360;
 
 
 /***************************************************************/
-dianliuzhi_C=cruccent_ratio*maxValue_C*T;
+dianliuzhi_C=T*maxValue_C*cruccent_ratio/16.8;
  if(dianliuzhi_C<=zero_limit*T){dianliuzhi_C=0;gonglvshishu_C=100;L_C_flag_C=1;}
 else
 	{
@@ -1744,7 +1800,7 @@ else
 }
 /*************************µÁ¡˜–≥≤®¬ ****************************************/
 if((dianliuzhi_C==0)&&(gonglvshishu_C==100))C_HI=0;
-
+else
 {
 for(i=3;i<=21;i=i+2){HI_SUM_C=(reslut[i]*reslut[i])+HI_SUM_C;}
 arm_sqrt_f32(HI_SUM_C,&HI_C);
@@ -1800,7 +1856,8 @@ allkvar=allkvar_A+allkvar_B+allkvar_C;//≥À“‘3£¨ «“ÚŒ™µÁ¡˜±‰¡ø «“ªœ‡µƒµÁ¡˜£¨”¶∏√±
 
 /*********************±‰±»≈–∂œ*******************************/
 
-
+if(KEY_3==1)dis_num=6;
+else dis_num=0;
 
 if(warning_flag==0&&(A_HV<HU_PROT_para&&B_HV<HU_PROT_para&&C_HV<HI_PROT_para)&&(A_HI<HI_PROT_para&&B_HI<HI_PROT_para&&C_HI<HI_PROT_para)&&(HI<HI_PROT_para)&&(HV<HU_PROT_para)&&((V_PROT_para_L+200)>dianya_zhi_A)&&((V_PROT_para_L+200)>dianya_zhi_B)&&((V_PROT_para_L+200)>dianya_zhi_C)&&((V_PROT_para_tri+400)>dianya_zhi))
 {
@@ -1813,7 +1870,7 @@ if(gonglvshishu<COS_ON_para&&L_C_flag_B==1)
       {
 	  	
       	{
-for(i=first;i<=32;i++)
+for(i=first;i<=32-dis_num;i++)
 if(comm_list[i].work_status==0&&(wugongkvar>=comm_list[i].size)&&comm_list[i].size>0)
 {
 display_nothing_close_open_warn=1;//…Ë÷√œ‘ æÕ∂»Î
@@ -1845,7 +1902,7 @@ if(((gonglvshishu>COS_OFF_para&&L_C_flag_B==1)||(L_C_flag_B==0)))
       {
 
 {
-for(i=end;i<=32;i++)
+for(i=end;i<=32-dis_num;i++)
 if(comm_list[i].work_status==1&&comm_list[i].size>0)
 
 {
@@ -1872,6 +1929,183 @@ end=1;
 
 
 }
+
+if(KEY_3==1)
+{
+if(1)
+  {
+if(gonglvshishu_A<COS_ON_para&&L_C_flag_A==1)
+{
+      {
+	  	
+      	{
+for(i=27;i<=30;i=i+3)
+if(comm_list[i].work_status==0&&(wugongkvar_A>=comm_list[i].size)&&comm_list[i].size>0)
+{
+display_nothing_close_open_warn=1;//…Ë÷√œ‘ æÕ∂»Î
+{
+set_74hc273(comm_list[i].id, ON);
+ Light_pad_on(dis_com,comm_list[i].id,1,1,0);
+comm_list[i].work_status=1;
+
+}
+return 0 ;
+}
+
+      	}
+  
+   
+}
+ }
+if(gonglvshishu_B<COS_ON_para&&L_C_flag_B==1)
+{
+      {
+	  	
+      	{
+for(i=28;i<=31;i=i+3)
+if(comm_list[i].work_status==0&&(wugongkvar_B>=comm_list[i].size)&&comm_list[i].size>0)
+{
+display_nothing_close_open_warn=1;//…Ë÷√œ‘ æÕ∂»Î
+{
+set_74hc273(comm_list[i].id, ON);
+ Light_pad_on(dis_com,comm_list[i].id,1,1,0);
+comm_list[i].work_status=1;
+
+}
+return 0 ;
+}
+
+      	}
+  
+   
+}
+ }
+
+if(gonglvshishu_C<COS_ON_para&&L_C_flag_C==1)
+{
+      {
+	  	
+      	{
+for(i=29;i<=32;i=i+3)
+if(comm_list[i].work_status==0&&(wugongkvar_C>=comm_list[i].size)&&comm_list[i].size>0)
+{
+display_nothing_close_open_warn=1;//…Ë÷√œ‘ æÕ∂»Î
+{
+set_74hc273(comm_list[i].id, ON);
+ Light_pad_on(dis_com,comm_list[i].id,1,1,0);
+comm_list[i].work_status=1;
+
+}
+return 0 ;
+}
+
+      	}
+  
+   
+}
+ }
+
+	
+  }
+
+
+
+
+
+
+
+if(1)
+
+{
+if((gonglvshishu_A>COS_OFF_para&&L_C_flag_A==1)||L_C_flag_A==0)
+{
+      {
+
+{
+for(i=27;i<=30;i=i+3)
+if(comm_list[i].work_status==1&&comm_list[i].size>0)
+
+{
+display_nothing_close_open_warn=2;//…Ë÷√œ‘ æ«–≥˝
+{
+set_74hc273(comm_list[i].id, OFF);
+ Light_pad_on(dis_com,comm_list[i].id,0,0,0);
+comm_list[i].work_status=0;
+}
+		{
+
+return 0 ;
+
+		}
+}
+
+}
+	  
+       }
+ }
+if((gonglvshishu_B>COS_OFF_para&&L_C_flag_B==1)||L_C_flag_B==0)
+{
+      {
+
+{
+for(i=28;i<=31;i=i+3)
+if(comm_list[i].work_status==1&&comm_list[i].size>0)
+
+{
+display_nothing_close_open_warn=2;//…Ë÷√œ‘ æ«–≥˝
+{
+set_74hc273(comm_list[i].id, OFF);
+ Light_pad_on(dis_com,comm_list[i].id,0,0,0);
+comm_list[i].work_status=0;
+}
+		{
+
+return 0 ;
+
+		}
+}
+
+}
+	  
+       }
+ }
+
+if((gonglvshishu_C>COS_OFF_para&&L_C_flag_C==1)||L_C_flag_C==0)
+
+{
+      {
+
+{
+for(i=29;i<=32;i=i+3)
+if(comm_list[i].work_status==1&&comm_list[i].size>0)
+
+{
+display_nothing_close_open_warn=2;//…Ë÷√œ‘ æ«–≥˝
+{
+set_74hc273(comm_list[i].id, OFF);
+ Light_pad_on(dis_com,comm_list[i].id,0,0,0);
+comm_list[i].work_status=0;
+}
+		{
+
+return 0 ;
+
+		}
+}
+
+}
+	  
+       }
+ }
+display_nothing_close_open_warn=0;//…Ë÷√œ‘ æŒﬁ
+	
+  }
+
+
+}
+
+
+
 //T=4;
 /**************************end*************************/
 
@@ -1935,7 +2169,7 @@ if(1)
 {
 
 {
-for(i=end;i<=32;i++)
+for(i=end;i<=32-dis_num;i++)
 if(comm_list[i].work_status==1&&comm_list[i].size>0)
 
 {
@@ -1955,7 +2189,90 @@ return 0 ;
 end=1;
 }
 	  
-       }		
+       }
+
+if(KEY_3==1)
+{
+{
+      {
+
+{
+for(i=27;i<=30;i=i+3)
+if(comm_list[i].work_status==1&&comm_list[i].size>0)
+
+{
+display_nothing_close_open_warn=2;//…Ë÷√œ‘ æ«–≥˝
+{
+set_74hc273(comm_list[i].id, OFF);
+ Light_pad_on(dis_com,comm_list[i].id,0,0,0);
+comm_list[i].work_status=0;
+}
+		{
+
+return 0 ;
+
+		}
+}
+
+}
+	  
+       }
+ }
+{
+      {
+
+{
+for(i=29;i<=32;i=i+3)
+if(comm_list[i].work_status==1&&comm_list[i].size>0)
+
+{
+display_nothing_close_open_warn=2;//…Ë÷√œ‘ æ«–≥˝
+{
+set_74hc273(comm_list[i].id, OFF);
+ Light_pad_on(dis_com,comm_list[i].id,0,0,0);
+comm_list[i].work_status=0;
+}
+		{
+
+return 0 ;
+
+		}
+}
+
+}
+	  
+       }
+ }
+{
+      {
+
+{
+for(i=29;i<=32;i=i+3)
+if(comm_list[i].work_status==1&&comm_list[i].size>0)
+
+{
+display_nothing_close_open_warn=2;//…Ë÷√œ‘ æ«–≥˝
+{
+set_74hc273(comm_list[i].id, OFF);
+ Light_pad_on(dis_com,comm_list[i].id,0,0,0);
+comm_list[i].work_status=0;
+}
+		{
+
+return 0 ;
+
+		}
+}
+
+}
+	  
+       }
+ }
+
+
+}
+
+
 }
 
 }
@@ -2191,7 +2508,6 @@ TIME_4
 		{	  
 		TIM_ClearITPendingBit(TIM4, TIM_IT_Update  );  //«Â≥˝TIMx∏¸–¬÷–∂œ±Í÷æ
                     IWDG_Feed();
-	//if(free_timeout>1)free_timeout--;
 		}
 	   	OSIntExit();  
 
@@ -2232,8 +2548,9 @@ TIME_4
 {	 
 	OSIntEnter();   
 	if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)  //ºÏ≤ÈTIM4∏¸–¬÷–∂œ∑¢…˙”Î∑Ò
-		{	
-			Work_Flag=!Work_Flag;	
+		{	// IWDG_Feed();
+		if(light_time_led>0)light_time_led--;
+			if(light_time_led==0){Work_Flag=!Work_Flag;	light_time_led=50;}
 			if(light_time>0)light_time--;
  if(light_time==0)LIGHT_backligt_off();
 if(delay_on==1)

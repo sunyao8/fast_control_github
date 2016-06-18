@@ -1,17 +1,6 @@
----- mybox Matches (16 in 0 files) ----
-Main.c (user):static box mybox;
-Main.c (user):void initmybox(void);//初始化自身信息
-Main.c (user):initmybox();//初始化自身信息
-Main.c (user):	       order_trans_rs485(mybox.myid,0,0,0,0);
-Main.c (user):void initmybox()//初始化自身信息
-Main.c (user):  mybox.master=0;
-Main.c (user):  mybox.myid=0;
-Main.c (user): mybox.source=0;
-Main.c (user): mybox.destination=0;
-Main.c (user): mybox.send=0;
-Main.c (user): mybox.relay=0;
-Main.c (user): mybox.message=0;
-Main.c (user):   order_trans_rs485(mybox.myid,0,0,0,0,CPT_LL);
-Main.c (user):   order_trans_rs485(mybox.myid,0,0,0,0,CPT_LL);
-Main.c (user):order_trans_rs485(mybox.myid,0,1,1,0,CONTROL);
-Main.c (user):order_trans_rs485(mybox.myid,0,1,2,0,CONTROL);
+---- first_init Matches (5 in 0 files) ----
+Main.c (user):static u8 first_init=1;
+Main.c (user):if(first_init==1)
+Main.c (user):first_init=0;
+Main.c (user):if(first_init==1)
+Main.c (user):first_init=0;
