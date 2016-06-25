@@ -1502,3 +1502,49 @@ delay_us(2);
 
 }
 }
+void init_74hc273()
+{
+
+GPIO_InitTypeDef GPIO_InitStructure;
+
+ 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE, ENABLE);
+
+
+ 	 GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0|GPIO_Pin_1|GPIO_Pin_2|GPIO_Pin_3|GPIO_Pin_4|GPIO_Pin_5| GPIO_Pin_6;
+ 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT; 		 //推挽输出
+ 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+ 		GPIO_Init(GPIOE, &GPIO_InitStructure);	   //本工程使用 
+
+
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
+ 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT; 		 //推挽输出
+ 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+ 		GPIO_Init(GPIOB, &GPIO_InitStructure);	   //本工程使用 
+
+
+
+ GPIO_ResetBits(GPIOE, GPIO_Pin_0);	
+
+GPIO_ResetBits(GPIOC, GPIO_Pin_9);	
+
+
+GPIO_ResetBits(GPIOE, GPIO_Pin_1);	
+
+GPIO_ResetBits(GPIOE, GPIO_Pin_2);	
+
+GPIO_ResetBits(GPIOE, GPIO_Pin_3);	
+
+GPIO_ResetBits(GPIOE, GPIO_Pin_4);	
+
+GPIO_ResetBits(GPIOE, GPIO_Pin_5);	
+
+GPIO_ResetBits(GPIOE, GPIO_Pin_6);	
+
+GPIO_ResetBits(GPIOB, GPIO_Pin_1);
+GPIO_ResetBits(GPIOB, GPIO_Pin_2);
+GPIO_ResetBits(GPIOB, GPIO_Pin_3);
+GPIO_ResetBits(GPIOB, GPIO_Pin_4);
+
+}
+
+

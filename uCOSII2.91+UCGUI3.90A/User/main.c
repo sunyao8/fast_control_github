@@ -236,7 +236,7 @@ u32 j;
 //u8 i;
 
    // OS_CPU_SysTickInit();/* Initialize the SysTick.                              */
-for(j=0;j<=100000000;j++);
+for(j=0;j<=100000;j++);
 delay_init();
 //delay_ms(10000);
 
@@ -249,11 +249,18 @@ IWDG_Init(6,625);
  init_light_off();
  LIGHT_backligt_on();
 init_cap();
-//sort_list();
+
+init_74hc273();//12伏输出管脚全部低电平
+for(i=1;i<=32;i++)
+set_74hc273(i, 0);//初始化全部切除
+delay_ms(5000);
+
 while(1)
 {
  App_TaskLCD();
   {
+
+
 
   if(KEY_3==0) 
 

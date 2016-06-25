@@ -67,6 +67,7 @@ void Graf_current_value(u32 Current_A,u32 Current_B,u32 Current_C);
 void HT595_Send_Byte(u8 state);
 
 void set_74hc273(int number,int onoff);
+void init_74hc273(void);
 
 
 #endif
