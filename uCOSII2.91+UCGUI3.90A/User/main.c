@@ -715,7 +715,7 @@ AT24CXX_Init();
 
 /*************************TIME*******************************/
 TIM4_Int_Init(4999,7199);//10Khz的计数频率，计数10K次为1000ms 
-	TIM2_Int_Init(4999+500,7199);//10Khz的计数频率，计数10K次为1000ms 
+	TIM2_Int_Init(4999,7199);//10Khz的计数频率，计数10K次为1000ms 
 
 EXTI_Configuration();
 Init_ADC();
@@ -1202,9 +1202,9 @@ allphase(testInput_V,testInput_C);
 	arm_max_f32(reslut, fftSize/2, &maxValue, &testIndex);
 dianya_zhi=maxValue/1000;
 dianya_zhi=dianya_zhi/4.35;
-if(dianya_zhi<=100)dianya_zhi=0;
+if(dianya_zhi<=100){dianya_zhi=0;HV=0;}
 /*************************电压谐波率****************************************/
-
+else
 {
 for(i=3;i<=21;i=i+2){HU_SUM_B=(reslut[i]*reslut[i])+HU_SUM_B;}
 arm_sqrt_f32(HU_SUM_B,&HU_B);
@@ -1416,10 +1416,10 @@ allphase(testInput_V,testInput_C);
 	arm_max_f32(reslut, fftSize/2, &maxValue, &testIndex);
 dianya_zhi_A=maxValue/1000;
 dianya_zhi_A=dianya_zhi_A/4.35;
-if(dianya_zhi_A<=100)dianya_zhi_A=0;
+if(dianya_zhi_A<=100){dianya_zhi_A=0;A_HV=0;}
 
 /*************************电压谐波率****************************************/
-
+else
 {
 for(i=3;i<=21;i=i+2){HU_SUM_A=(reslut[i]*reslut[i])+HU_SUM_A;}
 arm_sqrt_f32(HU_SUM_A,&HU_A);
@@ -1565,10 +1565,10 @@ allphase(testInput_V,testInput_C);
 	arm_max_f32(reslut, fftSize/2, &maxValue, &testIndex);
 dianya_zhi_B=maxValue/1000;
 dianya_zhi_B=dianya_zhi_B/4.35;
-if(dianya_zhi_B<=100)dianya_zhi_B=0;
+if(dianya_zhi_B<=100){dianya_zhi_B=0;B_HV=0;}
 
 /*************************电压谐波率****************************************/
-
+else
 {
 for(i=3;i<=21;i=i+2){HU_SUM_B=(reslut[i]*reslut[i])+HU_SUM_B;}
 arm_sqrt_f32(HU_SUM_B,&HU_B);
@@ -1722,10 +1722,10 @@ allphase(testInput_V,testInput_C);
 	arm_max_f32(reslut, fftSize/2, &maxValue, &testIndex);
 dianya_zhi_C=maxValue/1000;
 dianya_zhi_C=dianya_zhi_C/4.35;
-if(dianya_zhi_C<=100)dianya_zhi_C=0;
+if(dianya_zhi_C<=100){dianya_zhi_C=0;C_HV=0;}
 
 /*************************电压谐波率****************************************/
-
+else
 {
 for(i=3;i<=21;i=i+2){HU_SUM_C=(reslut[i]*reslut[i])+HU_SUM_C;}
 arm_sqrt_f32(HU_SUM_C,&HU_C);
@@ -2557,7 +2557,7 @@ TIME_4
 	if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)  //检查TIM4更新中断发生与否
 		{	// IWDG_Feed();
 		if(light_time_led>0)light_time_led--;
-			if(light_time_led==0){Work_Flag=!Work_Flag;	light_time_led=50;}
+			if(light_time_led==0){Work_Flag=!Work_Flag;	light_time_led=2;}
 			if(light_time>0)light_time--;
  if(light_time==0)LIGHT_backligt_off();
 if(delay_on==1)

@@ -637,7 +637,7 @@ void Graf_display(void)
 	u8 numCAP[]={0X00,0X02,0X09,0X05};
 u8 num1_5Seg[]=   {0X0F,0X05,0X06,0X00,0X0B,0X06,0X0F,0X02,0X06,0X03,0X0D,0X03,0X0D,0X07,0X07,0X00,0X0F,0X07,0X0F,0X03};
 u8 num6_12Seg[]={0X05,0X0F,0X00,0X06,0X06,0X0B,0X02,0X0F,0X03,0X06,0X03,0X0D,0X07,0X0D,0X00,0X07,0X07,0X0F,0X03,0X0F};
-
+static u16 count=1;
 if(light_time>0)
 {
 
@@ -841,8 +841,53 @@ break;
 		  	{
                   LIGHT_backligt_on();
 			comm_list[CAPA_num].size=comm_list[CAPA_num].size+1;	  
+			  delay_ms(150);
+
 		      }
-		  while(KEY_conceal==0);		  
+		  while(KEY_conceal==0){
+                                       count++;
+						   if(count==200)
+						   	{
+						   	count=1;                  
+                  LIGHT_backligt_on();
+
+	 Clera_lcd();
+
+    Write_1621(28,0x01);//LOG
+    Write_1621(31,0x01);//	显示P14功率因数电压电流和P12“动控制”符号
+   //Write_1621(24,0x08);	//	带△符号
+
+   if(COMMCAT_para==0)
+	  	  	{
+	  	  	Write_1621(31,0x0a);//自
+	  	  	}
+		  if(COMMCAT_para==1)
+	  	  	{
+	  	  Write_1621(31,0x0c);//手
+
+	  	  	}
+			comm_list[CAPA_num].size=comm_list[CAPA_num].size+1;
+			if(comm_list[CAPA_num].size>60)comm_list[CAPA_num].size=0;
+	capa1_value=comm_list[CAPA_num].size;
+
+		  WriteAll_1621(20,numCAP,4);
+
+   		  CAPA_num_shiwei=CAPA_num/10;
+		  CAPA_num_gewei=CAPA_num%10;
+	   	  capa1_value_shiwei=capa1_value/10;
+		  capa1_value_gewei=capa1_value%10;
+		  capa2_value_shiwei=capa1_value/10;
+		  capa2_value_gewei=capa1_value%10;
+
+		  WriteAll_1621(18,num1_5Seg+2*CAPA_num_shiwei,2);
+		  WriteAll_1621(16,num1_5Seg+2*CAPA_num_gewei,2);
+		  WriteAll_1621(10,num6_12Seg+2*capa1_value_shiwei,2);
+		  WriteAll_1621(12,num6_12Seg+2*capa1_value_gewei,2);
+delay_ms(150);
+                                                    }
+
+		  }		
+		  count=1;
 if(comm_list[CAPA_num].size>60)comm_list[CAPA_num].size=0;
 				capa1_value=comm_list[CAPA_num].size;
 		  AT24CXX_WriteOneByte(0x0010+(CAPA_num-1)*2,comm_list[CAPA_num].size);  //存储DELAY_ON_para到eeprom
