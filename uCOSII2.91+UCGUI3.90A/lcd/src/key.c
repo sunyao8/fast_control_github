@@ -94,8 +94,8 @@ u8 num_SET_Seg[]={0X0F,0X0F,0X06,0X0D,0X0F,0X06,0X0B,0X0F,0X06,0X07,0X0F,0X06,0X
 u8 numHU_prot[]={0x0e,0x05,0x06,0x07};
 u8 numHI_prot[]={0x00,0x05,0x06,0x07};
  u8 com_ID=1;
-u8 DELAY_ON_para=10;
- u8 DELAY_OFF_para=10;
+u8 DELAY_ON_para;
+ u8 DELAY_OFF_para;
  u8 COS_ON_para=90;
  u8 COS_OFF_para=95;
  u8 V_PROT_para_L=40;
@@ -226,14 +226,14 @@ a=AT24CXX_ReadOneByte(0x0000);
 		 	 LIGHT_backligt_on();
 			DELAY_ON_para++;
 			while(KEY_up==0);
-			if(DELAY_ON_para>60)DELAY_ON_para=5;
+			if(DELAY_ON_para>255)DELAY_ON_para=0;
 		 }
 		 if(KEY_down==0)
 		 {
 		 	 LIGHT_backligt_on();
 			DELAY_ON_para--;
 			while(KEY_down==0);
-			if(DELAY_ON_para<5)DELAY_ON_para=60;
+			if(DELAY_ON_para<0)DELAY_ON_para=255;
 		 }
 		  
 		 AT24CXX_WriteOneByte(0x0001,DELAY_ON_para);  //´æ´¢DELAY_ON_paraµ½eeprom
@@ -263,14 +263,14 @@ a=AT24CXX_ReadOneByte(0x0000);
 		 	 LIGHT_backligt_on();
 			DELAY_OFF_para++;
 			while(KEY_up==0);
-			if(DELAY_OFF_para>60)DELAY_OFF_para=5;
+			if(DELAY_OFF_para>255)DELAY_OFF_para=0;
 		 }
 		 if(KEY_down==0)
 		 {
 		 	 LIGHT_backligt_on();
 			DELAY_OFF_para--;
 			while(KEY_down==0);
-			if(DELAY_OFF_para<5)DELAY_OFF_para=60;
+			if(DELAY_OFF_para<0)DELAY_OFF_para=255;
 		 }
 
 			 AT24CXX_WriteOneByte(0x0002,DELAY_OFF_para);  //´æ´¢DELAY_ON_paraµ½eeprom

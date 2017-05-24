@@ -20,8 +20,8 @@
 #define OFF_time 15000		   //18500
 #define  k 0.8	//0.8
 #define PI2  6.28318530717959
-#define cruccent_ratio  1.07//电流校正系数
-#define zero_limit 1900         //1000为电流门限0.1           1500为电流门限0.15
+#define cruccent_ratio  1.07/2.955                //电流校正系数
+#define zero_limit 1200         //1000为电流门限0.1           1500为电流门限0.15
 
 
 
@@ -196,7 +196,7 @@ u8 L_C_flag_A=1;//感性容性标准变量
 u8 L_C_flag_B=1;//感性容性标准变量
 u8 L_C_flag_C=1;//感性容性标准变量
 
-#define TEST_LENGTH_SAMPLES 512*2 
+#define TEST_LENGTH_SAMPLES 512*2
  
 u8 phase_flag=0;
 u8 light_time=100;
@@ -1117,14 +1117,16 @@ u8 flag_phase=1;
  u8 HI_PROT_para=100;
  u8 ON_HOLD_para;
  u8 dis_num=0;
+ u8 DELAY_ON_para;
+u8 DELAY_OFF_para; 
 u8 T;
 static u8 warning_flag=0;
 
 
 {
 {
-		// DELAY_ON_para=AT24CXX_ReadOneByte(0x1000);  //存储DELAY_ON_para到eeprom
-		// DELAY_OFF_para=AT24CXX_ReadOneByte(0x2000);  //存储DELAY_OFF_para到eeprom
+		 DELAY_ON_para=AT24CXX_ReadOneByte(0x1000);  //存储DELAY_ON_para到eeprom
+		 DELAY_OFF_para=AT24CXX_ReadOneByte(0x2000);  //存储DELAY_OFF_para到eeprom
 		 COS_ON_para=AT24CXX_ReadOneByte(0x0003);  //存储DELAY_OFF_para到eeprom
 				 COS_OFF_para=AT24CXX_ReadOneByte(0x0004);  //存储DELAY_OFF_para到eeprom
 
@@ -1172,7 +1174,7 @@ testInput_C[i]=(float32_t)((ADC_Converted_CValue-ADC_Converted_base)*3.3/4096);/
 
 testInput_V[i]=(float32_t)((ADC_Converted_VValue-ADC_Converted_base)*3.3/4096);///  1550
 
-delay_us(36);//36->512
+delay_us(34);//36->512  //34 //46 //
 
         }
 
@@ -1882,12 +1884,12 @@ if(comm_list[i].work_status==0&&(wugongkvar>=comm_list[i].size)&&comm_list[i].si
 {
 display_nothing_close_open_warn=1;//设置显示投入
 {
+	
 set_74hc273(comm_list[i].id, ON);
  Light_pad_on(dis_com,comm_list[i].id,1,1,0);
 comm_list[i].work_status=1;
-//qeen( comm_list,i,32);
 first=i+1;
-
+//if(DELAY_ON_para>0)delay_ms(DELAY_ON_para*10);
 }
 return 0 ;
 }
@@ -1919,6 +1921,9 @@ set_74hc273(comm_list[i].id, OFF);
  Light_pad_on(dis_com,comm_list[i].id,0,0,0);
 comm_list[i].work_status=0;
 end=i+1;
+//if(DELAY_OFF_para!=0)
+//delay_ms(DELAY_OFF_para*10);
+
 //qeen(i,32);
 }
 		{
@@ -1954,6 +1959,8 @@ display_nothing_close_open_warn=1;//设置显示投入
 set_74hc273(comm_list[i].id, ON);
  Light_pad_on(dis_com,comm_list[i].id,1,1,0);
 comm_list[i].work_status=1;
+//if(DELAY_ON_para!=0)
+//delay_ms(DELAY_ON_para*10);
 
 }
 return 0 ;
@@ -1977,6 +1984,8 @@ display_nothing_close_open_warn=1;//设置显示投入
 set_74hc273(comm_list[i].id, ON);
  Light_pad_on(dis_com,comm_list[i].id,1,1,0);
 comm_list[i].work_status=1;
+//if(DELAY_ON_para!=0)
+//delay_ms(DELAY_ON_para*10);
 
 }
 return 0 ;
@@ -2001,6 +2010,8 @@ display_nothing_close_open_warn=1;//设置显示投入
 set_74hc273(comm_list[i].id, ON);
  Light_pad_on(dis_com,comm_list[i].id,1,1,0);
 comm_list[i].work_status=1;
+//if(DELAY_ON_para!=0)
+//delay_ms(DELAY_ON_para*10);
 
 }
 return 0 ;
@@ -2038,6 +2049,9 @@ display_nothing_close_open_warn=2;//设置显示切除
 set_74hc273(comm_list[i].id, OFF);
  Light_pad_on(dis_com,comm_list[i].id,0,0,0);
 comm_list[i].work_status=0;
+//if(DELAY_OFF_para!=0)
+//delay_ms(DELAY_OFF_para*10);
+
 }
 		{
 
@@ -2064,6 +2078,9 @@ display_nothing_close_open_warn=2;//设置显示切除
 set_74hc273(comm_list[i].id, OFF);
  Light_pad_on(dis_com,comm_list[i].id,0,0,0);
 comm_list[i].work_status=0;
+//if(DELAY_OFF_para!=0)
+//delay_ms(DELAY_OFF_para*10);
+
 }
 		{
 
@@ -2092,6 +2109,9 @@ display_nothing_close_open_warn=2;//设置显示切除
 set_74hc273(comm_list[i].id, OFF);
  Light_pad_on(dis_com,comm_list[i].id,0,0,0);
 comm_list[i].work_status=0;
+//if(DELAY_OFF_para!=0)
+//delay_ms(DELAY_OFF_para*10);
+
 }
 		{
 
