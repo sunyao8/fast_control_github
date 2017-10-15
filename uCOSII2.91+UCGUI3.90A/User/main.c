@@ -22,7 +22,7 @@
 #define PI2  6.28318530717959
 #define cruccent_ratio  1.07/2.955                //电流校正系数
 #define zero_limit 1200         //1000为电流门限0.1           1500为电流门限0.15
-
+#define dianyan_ratio 1.04
 
 
 
@@ -1203,7 +1203,7 @@ allphase(testInput_V,testInput_C);
 
 	arm_max_f32(reslut, fftSize/2, &maxValue, &testIndex);
 dianya_zhi=maxValue/1000;
-dianya_zhi=dianya_zhi/4.35;
+dianya_zhi=dianyan_ratio*dianya_zhi/4.35;
 if(dianya_zhi<=100){dianya_zhi=0;HV=0;}
 /*************************电压谐波率****************************************/
 else
@@ -1263,7 +1263,8 @@ else if(((angle[2]<180.0)&&(angle[2]>90.0))||(angle[2]>-270&&angle[2]<-180)){L_C
 dianliuzhi=T*maxValue_C*cruccent_ratio/16.8;
 arm_sqrt_f32(1-(arm_cos_f32(angle[0]-angle[1]))*(arm_cos_f32(angle[0]-angle[1])),&sine);
 gonglvshishu=sine*100;
-if(dianliuzhi<zero_limit*T){gonglvshishu=100;dianliuzhi=0;L_C_flag_B=1;}//电流小于0.1A 时，电流就清零
+if(gonglvshishu<10&&gonglvshishu>=0){L_C_flag_B=0;}
+if(dianliuzhi<zero_limit*T|dianliuzhi<100){gonglvshishu=100;dianliuzhi=0;L_C_flag_B=1;}//电流小于0.1A 时，电流就清零
 else dianliuzhi=dianliuzhi/1000;
 arm_sqrt_f32(1-sine*sine,&cose);
 
@@ -1417,7 +1418,7 @@ allphase(testInput_V,testInput_C);
 
 	arm_max_f32(reslut, fftSize/2, &maxValue, &testIndex);
 dianya_zhi_A=maxValue/1000;
-dianya_zhi_A=dianya_zhi_A/4.35;
+dianya_zhi_A=dianyan_ratio*dianya_zhi_A/4.35;
 if(dianya_zhi_A<=100){dianya_zhi_A=0;A_HV=0;}
 
 /*************************电压谐波率****************************************/
@@ -1496,7 +1497,8 @@ angle[2]=((angle[2])*PI2)/360;
 
 /***************************************************************/
  dianliuzhi_A=T*maxValue_C*cruccent_ratio/16.8;
- if(dianliuzhi_A<=zero_limit*T){dianliuzhi_A=0;gonglvshishu_A=100;L_C_flag_A=1;}
+if(gonglvshishu_A<10&&gonglvshishu_A>=0){L_C_flag_A=0;}
+ if(dianliuzhi_A<=zero_limit*T|dianliuzhi_A<100){dianliuzhi_A=0;gonglvshishu_A=100;L_C_flag_A=1;}
 else{ 
 	dianliuzhi_A=dianliuzhi_A/1000;
 	gonglvshishu_A=arm_cos_f32(angle[2])*100;//功率因素
@@ -1566,7 +1568,7 @@ allphase(testInput_V,testInput_C);
 
 	arm_max_f32(reslut, fftSize/2, &maxValue, &testIndex);
 dianya_zhi_B=maxValue/1000;
-dianya_zhi_B=dianya_zhi_B/4.35;
+dianya_zhi_B=dianyan_ratio*dianya_zhi_B/4.35;
 if(dianya_zhi_B<=100){dianya_zhi_B=0;B_HV=0;}
 
 /*************************电压谐波率****************************************/
@@ -1643,7 +1645,8 @@ angle[2]=((angle[2])*PI2)/360;
 
 /***************************************************************/
 dianliuzhi_B=T*maxValue_C*cruccent_ratio/16.8;
- if(dianliuzhi_B<=zero_limit*T){dianliuzhi_B=0;gonglvshishu_B=100;L_C_flag_B=1;}
+if(gonglvshishu_B<10&&gonglvshishu_B>=0){L_C_flag_B=0;}
+ if(dianliuzhi_B<=zero_limit*T|dianliuzhi_B<100){dianliuzhi_B=0;gonglvshishu_B=100;L_C_flag_B=1;}
 else {
         dianliuzhi_B=dianliuzhi_B/1000;
 	gonglvshishu_B=arm_cos_f32(angle[2])*100;//功率因素
@@ -1723,7 +1726,7 @@ allphase(testInput_V,testInput_C);
 
 	arm_max_f32(reslut, fftSize/2, &maxValue, &testIndex);
 dianya_zhi_C=maxValue/1000;
-dianya_zhi_C=dianya_zhi_C/4.35;
+dianya_zhi_C=dianyan_ratio*dianya_zhi_C/4.35;
 if(dianya_zhi_C<=100){dianya_zhi_C=0;C_HV=0;}
 
 /*************************电压谐波率****************************************/
@@ -1801,7 +1804,9 @@ angle[2]=((angle[2])*PI2)/360;
 
 /***************************************************************/
 dianliuzhi_C=T*maxValue_C*cruccent_ratio/16.8;
- if(dianliuzhi_C<=zero_limit*T){dianliuzhi_C=0;gonglvshishu_C=100;L_C_flag_C=1;}
+if(gonglvshishu_C<10&&gonglvshishu_C>=0){L_C_flag_C=0;}
+
+ if(dianliuzhi_C<=zero_limit*T|dianliuzhi_C<100){dianliuzhi_C=0;gonglvshishu_C=100;L_C_flag_C=1;}
 else
 	{
 	dianliuzhi_C=dianliuzhi_C/1000;
@@ -2436,10 +2441,13 @@ if(dis_com==1)
 {
 
 /*快速控制器手动切 共补*/
+	delay_us(1000);//按键消抖
+if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_12)==0)
+{
 set_74hc273(hand_id, OFF);
- Light_pad_on(dis_com,hand_id,1,1,0);
+ Light_pad_on(dis_com,hand_id,0,0,0);
 comm_list[hand_id].work_status=0;
-
+}
 }
 
 
@@ -2459,11 +2467,13 @@ if(dis_com==1)
 
 
 /*快速控制器手动投 共补*/
-
+	delay_us(1000);//按键消抖
+if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_14)==0)
+{
 set_74hc273(hand_id, ON);
  Light_pad_on(dis_com,hand_id,1,1,0);
 comm_list[hand_id].work_status=1;
-
+}
 }
 	
 }

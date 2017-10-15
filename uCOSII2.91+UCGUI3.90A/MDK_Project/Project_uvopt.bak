@@ -209,7 +209,7 @@
       <Focus>0</Focus>
       <ColumnNumber>63</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>1</TopLine>
+      <TopLine>7</TopLine>
       <CurrentLine>13</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\User\main.c</PathWithFileName>
@@ -1252,7 +1252,7 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>183</TopLine>
+      <TopLine>186</TopLine>
       <CurrentLine>193</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\User\uCGUI\GUI_X_uCOS.c</PathWithFileName>
@@ -1854,7 +1854,7 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>621</TopLine>
+      <TopLine>622</TopLine>
       <CurrentLine>623</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\lcd\src\ht1621.c</PathWithFileName>
