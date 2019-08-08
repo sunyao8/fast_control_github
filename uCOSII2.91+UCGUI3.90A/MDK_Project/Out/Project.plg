@@ -7,6 +7,56 @@ C:\Users\Administrator\Documents\GitHub\fast_control_github\uCOSII2.91+UCGUI3.90
 Project File Date:  01/15/2016
 
 <h2>Output:</h2>
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(65): warning:  #1295-D: Deprecated declaration App_TaskLCD - give arg types
+..\User\main.c(66): warning:  #1295-D: Deprecated declaration sort_list - give arg types
+..\User\main.c(119): warning:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(187): warning:  #1295-D: Deprecated declaration init_cap - give arg types
+..\User\main.c(231): warning:  #177-D: variable "os_err" was declared but never referenced
+..\User\main.c(786): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1263): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1266): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1284): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1499): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1500): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1512): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1647): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1648): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1660): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1806): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1807): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1821): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1085): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1103): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1104): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1118): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(1120): warning:  #550-D: variable "DELAY_ON_para" was set but never used
+..\User\main.c(1121): warning:  #550-D: variable "DELAY_OFF_para" was set but never used
+compiling uctsk_Task.c...
+compiling uctsk_OSView.c...
+compiling stm32f4xx_it.c...
+compiling os_cpu_c.c...
+compiling OS_AppHooks.c...
+compiling os_view.c...
+compiling os_viewc.c...
+compiling GUI_X_uCOS.c...
+compiling GUI_X_Touch.c...
+compiling delay.c...
+compiling ht1621.c...
+..\lcd\src\ht1621.c(554): warning:  #177-D: variable "num12dpSeg" was declared but never referenced
+..\lcd\src\ht1621.c(643): warning:  #177-D: variable "num12dpSeg" was declared but never referenced
+..\lcd\src\ht1621.c(734): warning:  #177-D: variable "num12dpSeg" was declared but never referenced
+..\lcd\src\ht1621.c(825): warning:  #177-D: variable "num12dpSeg" was declared but never referenced
+compiling key.c...
+..\lcd\src\key.c(236): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\lcd\src\key.c(273): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\lcd\src\key.c(636): warning:  #550-D: variable "capa2_value_shiwei" was set but never used
+..\lcd\src\key.c(636): warning:  #550-D: variable "capa2_value_gewei" was set but never used
+linking...
+Program Size: Code=58396 RO-data=27044 RW-data=304 ZI-data=21880  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 32 Warning(s).
 Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_github\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
 * JLink Info: Device "STM32F407VE" selected.
 Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_github\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
@@ -16,7 +66,7 @@ JLink info:
 DLL: V4.96 , compiled Dec 22 2014 09:51:48
 Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
 Hardware: V7.00
-S/N : 20160403 
+S/N : 20141017 
 Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
  
 * JLink Info: Found SWD-DP with ID 0x2BA01477
@@ -49,30 +99,29 @@ compiling main.c...
 ..\User\main.c(119): warning:  #77-D: this declaration has no storage class or type specifier
 ..\User\main.c(187): warning:  #1295-D: Deprecated declaration init_cap - give arg types
 ..\User\main.c(231): warning:  #177-D: variable "os_err" was declared but never referenced
-..\User\main.c(786): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
-..\User\main.c(1263): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-..\User\main.c(1266): warning:  #186-D: pointless comparison of unsigned integer with zero
-..\User\main.c(1284): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-..\User\main.c(1499): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-..\User\main.c(1500): warning:  #186-D: pointless comparison of unsigned integer with zero
-..\User\main.c(1512): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-..\User\main.c(1647): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-..\User\main.c(1648): warning:  #186-D: pointless comparison of unsigned integer with zero
-..\User\main.c(1660): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-..\User\main.c(1806): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-..\User\main.c(1807): warning:  #186-D: pointless comparison of unsigned integer with zero
-..\User\main.c(1821): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-..\User\main.c(1085): warning:  #550-D: variable "status" was set but never used
-..\User\main.c(1103): warning:  #177-D: variable "gl" was declared but never referenced
-..\User\main.c(1104): warning:  #550-D: variable "wugongkvar_95" was set but never used
-..\User\main.c(1118): warning:  #550-D: variable "ON_HOLD_para" was set but never used
-..\User\main.c(1120): warning:  #550-D: variable "DELAY_ON_para" was set but never used
-..\User\main.c(1121): warning:  #550-D: variable "DELAY_OFF_para" was set but never used
+..\User\main.c(787): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1264): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1267): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1285): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1500): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1501): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1513): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1648): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1649): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1661): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1807): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1808): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1822): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1086): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1104): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1105): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1119): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(1121): warning:  #550-D: variable "DELAY_ON_para" was set but never used
+..\User\main.c(1122): warning:  #550-D: variable "DELAY_OFF_para" was set but never used
 linking...
-Program Size: Code=58484 RO-data=27044 RW-data=304 ZI-data=21848  
+Program Size: Code=58404 RO-data=27044 RW-data=304 ZI-data=21880  
 FromELF: creating hex file...
 ".\Out\Project.axf" - 0 Error(s), 24 Warning(s).
-Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_github\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
 Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_github\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
 * JLink Info: Device "STM32F407VE" selected.
 Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_github\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
@@ -82,7 +131,1135 @@ JLink info:
 DLL: V4.96 , compiled Dec 22 2014 09:51:48
 Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
 Hardware: V7.00
-S/N : 20160403 
+S/N : 20141017 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+* JLink Info: FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+ROMTableAddr = 0xE00FF003
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.300V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(65): warning:  #1295-D: Deprecated declaration App_TaskLCD - give arg types
+..\User\main.c(66): warning:  #1295-D: Deprecated declaration sort_list - give arg types
+..\User\main.c(119): warning:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(187): warning:  #1295-D: Deprecated declaration init_cap - give arg types
+..\User\main.c(231): warning:  #177-D: variable "os_err" was declared but never referenced
+..\User\main.c(663): error:  #65: expected a ";"
+..\User\main.c(664): error:  #127: expected a statement
+..\User\main.c(842): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1319): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1322): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1340): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1555): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1556): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1568): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1703): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1704): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1716): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1862): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1863): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1877): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1141): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1159): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1160): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1174): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(1176): warning:  #550-D: variable "DELAY_ON_para" was set but never used
+..\User\main.c(1177): warning:  #550-D: variable "DELAY_OFF_para" was set but never used
+Target not created
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(65): warning:  #1295-D: Deprecated declaration App_TaskLCD - give arg types
+..\User\main.c(66): warning:  #1295-D: Deprecated declaration sort_list - give arg types
+..\User\main.c(119): warning:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(187): warning:  #1295-D: Deprecated declaration init_cap - give arg types
+..\User\main.c(231): warning:  #177-D: variable "os_err" was declared but never referenced
+..\User\main.c(842): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1319): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1322): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1340): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1555): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1556): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1568): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1703): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1704): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1716): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1862): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1863): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1877): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1141): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1159): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1160): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1174): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(1176): warning:  #550-D: variable "DELAY_ON_para" was set but never used
+..\User\main.c(1177): warning:  #550-D: variable "DELAY_OFF_para" was set but never used
+linking...
+Program Size: Code=58424 RO-data=27048 RW-data=304 ZI-data=21880  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 24 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(65): warning:  #1295-D: Deprecated declaration App_TaskLCD - give arg types
+..\User\main.c(66): warning:  #1295-D: Deprecated declaration sort_list - give arg types
+..\User\main.c(119): warning:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(187): warning:  #1295-D: Deprecated declaration init_cap - give arg types
+..\User\main.c(231): warning:  #177-D: variable "os_err" was declared but never referenced
+..\User\main.c(842): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1319): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1322): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1340): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1555): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1556): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1568): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1703): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1704): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1716): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1862): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1863): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1877): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1141): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1159): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1160): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1174): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(1176): warning:  #550-D: variable "DELAY_ON_para" was set but never used
+..\User\main.c(1177): warning:  #550-D: variable "DELAY_OFF_para" was set but never used
+linking...
+Program Size: Code=58484 RO-data=27044 RW-data=304 ZI-data=21880  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 24 Warning(s).
+Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_github\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
+* JLink Info: Device "STM32F407VE" selected.
+Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_github\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.96 , compiled Dec 22 2014 09:51:48
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N : 20141017 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+* JLink Info: FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+ROMTableAddr = 0xE00FF003
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.300V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(65): warning:  #1295-D: Deprecated declaration App_TaskLCD - give arg types
+..\User\main.c(66): warning:  #1295-D: Deprecated declaration sort_list - give arg types
+..\User\main.c(119): warning:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(187): warning:  #1295-D: Deprecated declaration init_cap - give arg types
+..\User\main.c(231): warning:  #177-D: variable "os_err" was declared but never referenced
+..\User\main.c(842): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1319): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1322): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1340): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1555): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1556): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1568): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1703): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1704): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1716): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1862): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1863): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1877): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1141): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1159): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1160): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1174): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(1176): warning:  #550-D: variable "DELAY_ON_para" was set but never used
+..\User\main.c(1177): warning:  #550-D: variable "DELAY_OFF_para" was set but never used
+linking...
+Program Size: Code=58744 RO-data=27048 RW-data=304 ZI-data=21880  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 24 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(65): warning:  #1295-D: Deprecated declaration App_TaskLCD - give arg types
+..\User\main.c(66): warning:  #1295-D: Deprecated declaration sort_list - give arg types
+..\User\main.c(119): warning:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(187): warning:  #1295-D: Deprecated declaration init_cap - give arg types
+..\User\main.c(231): warning:  #177-D: variable "os_err" was declared but never referenced
+..\User\main.c(842): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1319): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1322): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1340): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1555): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1556): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1568): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1703): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1704): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1716): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1862): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1863): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1877): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1141): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1159): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1160): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1174): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(1176): warning:  #550-D: variable "DELAY_ON_para" was set but never used
+..\User\main.c(1177): warning:  #550-D: variable "DELAY_OFF_para" was set but never used
+linking...
+Program Size: Code=58744 RO-data=27048 RW-data=304 ZI-data=21880  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 24 Warning(s).
+Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_github\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
+* JLink Info: Device "STM32F407VE" selected.
+Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_github\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.96 , compiled Dec 22 2014 09:51:48
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N : 20141017 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+* JLink Info: FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+ROMTableAddr = 0xE00FF003
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.300V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(65): warning:  #1295-D: Deprecated declaration App_TaskLCD - give arg types
+..\User\main.c(66): warning:  #1295-D: Deprecated declaration sort_list - give arg types
+..\User\main.c(119): warning:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(187): warning:  #1295-D: Deprecated declaration init_cap - give arg types
+..\User\main.c(231): warning:  #177-D: variable "os_err" was declared but never referenced
+..\User\main.c(842): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1319): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1322): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1340): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1555): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1556): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1568): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1703): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1704): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1716): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1862): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1863): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1877): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1141): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1159): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1160): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1174): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(1176): warning:  #550-D: variable "DELAY_ON_para" was set but never used
+..\User\main.c(1177): warning:  #550-D: variable "DELAY_OFF_para" was set but never used
+linking...
+Program Size: Code=58784 RO-data=27048 RW-data=304 ZI-data=21880  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 24 Warning(s).
+Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_github\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
+* JLink Info: Device "STM32F407VE" selected.
+Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_github\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.96 , compiled Dec 22 2014 09:51:48
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N : 20141017 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+* JLink Info: FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+ROMTableAddr = 0xE00FF003
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.300V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(65): warning:  #1295-D: Deprecated declaration App_TaskLCD - give arg types
+..\User\main.c(66): warning:  #1295-D: Deprecated declaration sort_list - give arg types
+..\User\main.c(119): warning:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(187): warning:  #1295-D: Deprecated declaration init_cap - give arg types
+..\User\main.c(231): warning:  #177-D: variable "os_err" was declared but never referenced
+..\User\main.c(842): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1319): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1322): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1340): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1555): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1556): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1568): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1703): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1704): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1716): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1862): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1863): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1877): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1141): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1159): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1160): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1174): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(1176): warning:  #550-D: variable "DELAY_ON_para" was set but never used
+..\User\main.c(1177): warning:  #550-D: variable "DELAY_OFF_para" was set but never used
+linking...
+Program Size: Code=58784 RO-data=27048 RW-data=304 ZI-data=21880  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 24 Warning(s).
+Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_github\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
+* JLink Info: Device "STM32F407VE" selected.
+Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_github\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.96 , compiled Dec 22 2014 09:51:48
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N : 20141017 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+* JLink Info: FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+ROMTableAddr = 0xE00FF003
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.300V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(65): warning:  #1295-D: Deprecated declaration App_TaskLCD - give arg types
+..\User\main.c(66): warning:  #1295-D: Deprecated declaration sort_list - give arg types
+..\User\main.c(119): warning:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(187): warning:  #1295-D: Deprecated declaration init_cap - give arg types
+..\User\main.c(231): warning:  #177-D: variable "os_err" was declared but never referenced
+..\User\main.c(842): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1319): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1322): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1340): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1555): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1556): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1568): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1703): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1704): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1716): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1862): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1863): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1877): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1141): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1159): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1160): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1174): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(1176): warning:  #550-D: variable "DELAY_ON_para" was set but never used
+..\User\main.c(1177): warning:  #550-D: variable "DELAY_OFF_para" was set but never used
+linking...
+Program Size: Code=58784 RO-data=27048 RW-data=304 ZI-data=21880  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 24 Warning(s).
+Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_github\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
+* JLink Info: Device "STM32F407VE" selected.
+Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_github\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.96 , compiled Dec 22 2014 09:51:48
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N : 20141017 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+* JLink Info: FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+ROMTableAddr = 0xE00FF003
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.300V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(65): warning:  #1295-D: Deprecated declaration App_TaskLCD - give arg types
+..\User\main.c(66): warning:  #1295-D: Deprecated declaration sort_list - give arg types
+..\User\main.c(119): warning:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(187): warning:  #1295-D: Deprecated declaration init_cap - give arg types
+..\User\main.c(231): warning:  #177-D: variable "os_err" was declared but never referenced
+..\User\main.c(842): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1319): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1322): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1340): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1555): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1556): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1568): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1703): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1704): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1716): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1862): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1863): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1877): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1141): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1159): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1160): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1174): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(1176): warning:  #550-D: variable "DELAY_ON_para" was set but never used
+..\User\main.c(1177): warning:  #550-D: variable "DELAY_OFF_para" was set but never used
+linking...
+Program Size: Code=58792 RO-data=27048 RW-data=304 ZI-data=21880  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 24 Warning(s).
+Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_github\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
+* JLink Info: Device "STM32F407VE" selected.
+Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_github\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.96 , compiled Dec 22 2014 09:51:48
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N : 20141017 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+* JLink Info: FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+ROMTableAddr = 0xE00FF003
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.300V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(65): warning:  #1295-D: Deprecated declaration App_TaskLCD - give arg types
+..\User\main.c(66): warning:  #1295-D: Deprecated declaration sort_list - give arg types
+..\User\main.c(119): warning:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(187): warning:  #1295-D: Deprecated declaration init_cap - give arg types
+..\User\main.c(231): warning:  #177-D: variable "os_err" was declared but never referenced
+..\User\main.c(842): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1319): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1322): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1340): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1555): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1556): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1568): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1703): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1704): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1716): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1862): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1863): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1877): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1141): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1159): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1160): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1174): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(1176): warning:  #550-D: variable "DELAY_ON_para" was set but never used
+..\User\main.c(1177): warning:  #550-D: variable "DELAY_OFF_para" was set but never used
+linking...
+Program Size: Code=58792 RO-data=27048 RW-data=304 ZI-data=21880  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 24 Warning(s).
+Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_github\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
+* JLink Info: Device "STM32F407VE" selected.
+Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_github\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.96 , compiled Dec 22 2014 09:51:48
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N : 20141017 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+* JLink Info: FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+ROMTableAddr = 0xE00FF003
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.300V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(65): warning:  #1295-D: Deprecated declaration App_TaskLCD - give arg types
+..\User\main.c(66): warning:  #1295-D: Deprecated declaration sort_list - give arg types
+..\User\main.c(119): warning:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(187): warning:  #1295-D: Deprecated declaration init_cap - give arg types
+..\User\main.c(231): warning:  #177-D: variable "os_err" was declared but never referenced
+..\User\main.c(659): warning:  #550-D: variable "idle_id" was set but never used
+..\User\main.c(844): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1321): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1324): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1342): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1557): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1558): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1570): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1705): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1706): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1718): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1864): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1865): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1879): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1143): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1161): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1162): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1176): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(1178): warning:  #550-D: variable "DELAY_ON_para" was set but never used
+..\User\main.c(1179): warning:  #550-D: variable "DELAY_OFF_para" was set but never used
+linking...
+Program Size: Code=58740 RO-data=27044 RW-data=304 ZI-data=21880  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 25 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(65): warning:  #1295-D: Deprecated declaration App_TaskLCD - give arg types
+..\User\main.c(66): warning:  #1295-D: Deprecated declaration sort_list - give arg types
+..\User\main.c(119): warning:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(187): warning:  #1295-D: Deprecated declaration init_cap - give arg types
+..\User\main.c(231): warning:  #177-D: variable "os_err" was declared but never referenced
+..\User\main.c(846): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1323): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1326): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1344): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1559): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1560): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1572): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1707): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1708): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1720): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1866): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1867): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1881): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1145): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1163): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1164): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1178): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(1180): warning:  #550-D: variable "DELAY_ON_para" was set but never used
+..\User\main.c(1181): warning:  #550-D: variable "DELAY_OFF_para" was set but never used
+linking...
+Program Size: Code=58820 RO-data=27044 RW-data=308 ZI-data=21884  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 24 Warning(s).
+Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_github\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
+* JLink Info: Device "STM32F407VE" selected.
+Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_github\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.96 , compiled Dec 22 2014 09:51:48
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N : 20141017 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+* JLink Info: FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+ROMTableAddr = 0xE00FF003
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.300V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(65): warning:  #1295-D: Deprecated declaration App_TaskLCD - give arg types
+..\User\main.c(66): warning:  #1295-D: Deprecated declaration sort_list - give arg types
+..\User\main.c(119): warning:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(187): warning:  #1295-D: Deprecated declaration init_cap - give arg types
+..\User\main.c(231): warning:  #177-D: variable "os_err" was declared but never referenced
+..\User\main.c(849): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1326): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1329): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1347): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1562): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1563): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1575): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1710): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1711): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1723): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1869): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1870): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1884): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1148): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1166): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1167): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1181): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(1183): warning:  #550-D: variable "DELAY_ON_para" was set but never used
+..\User\main.c(1184): warning:  #550-D: variable "DELAY_OFF_para" was set but never used
+linking...
+Program Size: Code=58840 RO-data=27048 RW-data=308 ZI-data=21884  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 24 Warning(s).
+Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_github\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
+* JLink Info: Device "STM32F407VE" selected.
+Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_github\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.96 , compiled Dec 22 2014 09:51:48
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N : 20141017 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+* JLink Info: FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+ROMTableAddr = 0xE00FF003
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.300V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(65): warning:  #1295-D: Deprecated declaration App_TaskLCD - give arg types
+..\User\main.c(66): warning:  #1295-D: Deprecated declaration sort_list - give arg types
+..\User\main.c(119): warning:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(187): warning:  #1295-D: Deprecated declaration init_cap - give arg types
+..\User\main.c(231): warning:  #177-D: variable "os_err" was declared but never referenced
+..\User\main.c(849): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1326): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1329): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1347): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1562): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1563): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1575): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1710): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1711): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1723): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1869): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1870): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1884): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1148): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1166): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1167): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1181): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(1183): warning:  #550-D: variable "DELAY_ON_para" was set but never used
+..\User\main.c(1184): warning:  #550-D: variable "DELAY_OFF_para" was set but never used
+linking...
+Program Size: Code=58848 RO-data=27048 RW-data=308 ZI-data=21884  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 24 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(65): warning:  #1295-D: Deprecated declaration App_TaskLCD - give arg types
+..\User\main.c(66): warning:  #1295-D: Deprecated declaration sort_list - give arg types
+..\User\main.c(119): warning:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(187): warning:  #1295-D: Deprecated declaration init_cap - give arg types
+..\User\main.c(231): warning:  #177-D: variable "os_err" was declared but never referenced
+..\User\main.c(849): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1326): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1329): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1347): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1562): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1563): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1575): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1710): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1711): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1723): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1869): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1870): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1884): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1148): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1166): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1167): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1181): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(1183): warning:  #550-D: variable "DELAY_ON_para" was set but never used
+..\User\main.c(1184): warning:  #550-D: variable "DELAY_OFF_para" was set but never used
+linking...
+Program Size: Code=58836 RO-data=27044 RW-data=308 ZI-data=21884  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 24 Warning(s).
+Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_github\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
+* JLink Info: Device "STM32F407VE" selected.
+Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_github\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.96 , compiled Dec 22 2014 09:51:48
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N : 20141017 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+* JLink Info: FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+ROMTableAddr = 0xE00FF003
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.300V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(65): warning:  #1295-D: Deprecated declaration App_TaskLCD - give arg types
+..\User\main.c(66): warning:  #1295-D: Deprecated declaration sort_list - give arg types
+..\User\main.c(119): warning:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(187): warning:  #1295-D: Deprecated declaration init_cap - give arg types
+..\User\main.c(231): warning:  #177-D: variable "os_err" was declared but never referenced
+..\User\main.c(849): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1326): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1329): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1347): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1562): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1563): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1575): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1710): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1711): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1723): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1869): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1870): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1884): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1148): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1166): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1167): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1181): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(1183): warning:  #550-D: variable "DELAY_ON_para" was set but never used
+..\User\main.c(1184): warning:  #550-D: variable "DELAY_OFF_para" was set but never used
+linking...
+Program Size: Code=58848 RO-data=27048 RW-data=308 ZI-data=21884  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 24 Warning(s).
+Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_github\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
+* JLink Info: Device "STM32F407VE" selected.
+Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_github\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.96 , compiled Dec 22 2014 09:51:48
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N : 20141017 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+* JLink Info: FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+ROMTableAddr = 0xE00FF003
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.300V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(65): warning:  #1295-D: Deprecated declaration App_TaskLCD - give arg types
+..\User\main.c(66): warning:  #1295-D: Deprecated declaration sort_list - give arg types
+..\User\main.c(119): warning:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(187): warning:  #1295-D: Deprecated declaration init_cap - give arg types
+..\User\main.c(231): warning:  #177-D: variable "os_err" was declared but never referenced
+..\User\main.c(850): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1327): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1330): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1348): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1563): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1564): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1576): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1711): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1712): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1724): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1870): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1871): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1885): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1149): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1167): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1168): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1182): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(1184): warning:  #550-D: variable "DELAY_ON_para" was set but never used
+..\User\main.c(1185): warning:  #550-D: variable "DELAY_OFF_para" was set but never used
+linking...
+Program Size: Code=58848 RO-data=27048 RW-data=308 ZI-data=21884  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 24 Warning(s).
+Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_github\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
+* JLink Info: Device "STM32F407VE" selected.
+Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_github\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.96 , compiled Dec 22 2014 09:51:48
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N : 20141017 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+* JLink Info: FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+ROMTableAddr = 0xE00FF003
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.300V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(65): warning:  #1295-D: Deprecated declaration App_TaskLCD - give arg types
+..\User\main.c(66): warning:  #1295-D: Deprecated declaration sort_list - give arg types
+..\User\main.c(119): warning:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(187): warning:  #1295-D: Deprecated declaration init_cap - give arg types
+..\User\main.c(231): warning:  #177-D: variable "os_err" was declared but never referenced
+..\User\main.c(660): warning:  #550-D: variable "idle_id" was set but never used
+..\User\main.c(849): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1326): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1329): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1347): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1562): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1563): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1575): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1710): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1711): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1723): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1869): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1870): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1884): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1148): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1166): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1167): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1181): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(1183): warning:  #550-D: variable "DELAY_ON_para" was set but never used
+..\User\main.c(1184): warning:  #550-D: variable "DELAY_OFF_para" was set but never used
+linking...
+Program Size: Code=58760 RO-data=27048 RW-data=308 ZI-data=21884  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 25 Warning(s).
+Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_github\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
+* JLink Info: Device "STM32F407VE" selected.
+Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_github\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.96 , compiled Dec 22 2014 09:51:48
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N : 20141017 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+* JLink Info: FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+ROMTableAddr = 0xE00FF003
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.300V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(65): warning:  #1295-D: Deprecated declaration App_TaskLCD - give arg types
+..\User\main.c(66): warning:  #1295-D: Deprecated declaration sort_list - give arg types
+..\User\main.c(119): warning:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(187): warning:  #1295-D: Deprecated declaration init_cap - give arg types
+..\User\main.c(231): warning:  #177-D: variable "os_err" was declared but never referenced
+..\User\main.c(660): warning:  #550-D: variable "idle_id" was set but never used
+..\User\main.c(852): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1329): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1332): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1350): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1565): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1566): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1578): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1713): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1714): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1726): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1872): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1873): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1887): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1151): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1169): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1170): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1184): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(1186): warning:  #550-D: variable "DELAY_ON_para" was set but never used
+..\User\main.c(1187): warning:  #550-D: variable "DELAY_OFF_para" was set but never used
+linking...
+Program Size: Code=58800 RO-data=27048 RW-data=308 ZI-data=21884  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 25 Warning(s).
+Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_github\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
+* JLink Info: Device "STM32F407VE" selected.
+Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_github\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.96 , compiled Dec 22 2014 09:51:48
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N : 20141017 
+Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+* JLink Info: FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+ROMTableAddr = 0xE00FF003
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.300V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'Target 1'
+compiling main.c...
+..\User\main.c(65): warning:  #1295-D: Deprecated declaration App_TaskLCD - give arg types
+..\User\main.c(66): warning:  #1295-D: Deprecated declaration sort_list - give arg types
+..\User\main.c(119): warning:  #77-D: this declaration has no storage class or type specifier
+..\User\main.c(187): warning:  #1295-D: Deprecated declaration init_cap - give arg types
+..\User\main.c(231): warning:  #177-D: variable "os_err" was declared but never referenced
+..\User\main.c(660): warning:  #550-D: variable "idle_id" was set but never used
+..\User\main.c(850): warning:  #177-D: variable "DMA_InitStructure" was declared but never referenced
+..\User\main.c(1327): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1330): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1348): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1563): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1564): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1576): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1711): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1712): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1724): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1870): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1871): warning:  #186-D: pointless comparison of unsigned integer with zero
+..\User\main.c(1885): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\User\main.c(1149): warning:  #550-D: variable "status" was set but never used
+..\User\main.c(1167): warning:  #177-D: variable "gl" was declared but never referenced
+..\User\main.c(1168): warning:  #550-D: variable "wugongkvar_95" was set but never used
+..\User\main.c(1182): warning:  #550-D: variable "ON_HOLD_para" was set but never used
+..\User\main.c(1184): warning:  #550-D: variable "DELAY_ON_para" was set but never used
+..\User\main.c(1185): warning:  #550-D: variable "DELAY_OFF_para" was set but never used
+linking...
+Program Size: Code=58768 RO-data=27048 RW-data=308 ZI-data=21884  
+FromELF: creating hex file...
+".\Out\Project.axf" - 0 Error(s), 25 Warning(s).
+Load "C:\\Users\\Administrator\\Documents\\GitHub\\fast_control_github\\uCOSII2.91+UCGUI3.90A\\MDK_Project\\Out\\Project.AXF" 
+* JLink Info: Device "STM32F407VE" selected.
+Set JLink Project File to "C:\Users\Administrator\Documents\GitHub\fast_control_github\uCOSII2.91+UCGUI3.90A\MDK_Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.96 , compiled Dec 22 2014 09:51:48
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N : 20141017 
 Feature(s) : RDI,FlashDL,FlashBP,JFlash,GDBFull 
  
 * JLink Info: Found SWD-DP with ID 0x2BA01477
